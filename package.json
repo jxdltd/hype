@@ -1,0 +1,19 @@
+{
+  "name": "hype",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "turbo": "^2.5.6"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
