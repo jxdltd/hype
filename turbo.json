@@ -9,6 +9,5 @@
         "persistent": true,
         "cache": false
       }
-    },
-    "packageManager": "bun@1.2.21"
+    }
   }
