@@ -37,13 +37,7 @@ function RouteComponent() {
         encType={"multipart/form-data"}
         className="flex flex-col gap-4 bg-white p-4 rounded-xl border border-neutral-200 w-full max-w-md"
       >
-        <form.Field
-          name="name"
-          // validators={{
-          //   onChange: ({ value }) =>
-          //     value < 8 ? "Client validation: You must be at least 8" : undefined,
-          // }}
-        >
+        <form.Field name="name">
           {(field) => {
             return (
               <div>
