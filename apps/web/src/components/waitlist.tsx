@@ -11,7 +11,10 @@ export function Waitlist() {
     fetch("http://localhost:3000/api/waitlist", {
       method: "POST",
       body: JSON.stringify({ email }),
-    }); // todo: api key
+      headers: {
+        "x-api-key": import.meta.env.PUBLIC_HYPE_KEY,
+      },
+    });
   }
 
   if (submitted) {

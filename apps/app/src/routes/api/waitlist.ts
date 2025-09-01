@@ -1,6 +1,11 @@
 import { db, eq } from "@repo/database";
-import { publicKey } from "@repo/database/schema";
+import { prospect, publicKey } from "@repo/database/schema";
 import { createServerFileRoute } from "@tanstack/react-start/server";
+import z from "zod";
+
+const bodySchema = z.object({
+  email: z.email(),
+});
 
 export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
   //   GET: ({ request }) => {
@@ -18,6 +23,8 @@ export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
       return new Response("Unauthorized", { status: 401 });
     }
 
+    const body = bodySchema.parse(await request.json());
+
     const found = await db.query.publicKey.findFirst({
       where: eq(publicKey.key, apiKey),
     });
@@ -26,7 +33,11 @@ export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
       return new Response("Unauthorized", { status: 401 });
     }
 
-    console.log("HELLO WORLD");
+    await db.insert(prospect).values({
+      id: crypto.randomUUID(),
+      email: body.email,
+      projectId: found.projectId,
+    });
 
     return new Response("OK");
   },
