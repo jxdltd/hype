@@ -1,20 +1,21 @@
 {
-  "name": "hype",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "dev": "turbo run dev"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "turbo": "^2.5.6"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "packageManager": "bun@1.2.21"
+	"name": "hype",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"dev": "turbo run dev"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.2",
+		"@types/bun": "latest",
+		"turbo": "^2.5.6"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"packageManager": "bun@1.2.21"
 }

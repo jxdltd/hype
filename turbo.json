@@ -1,13 +1,13 @@
 {
-    "$schema": "https://turborepo.com/schema.json",
-    "ui": "tui",
-    "tasks": {
-      "build": {
-        "outputs": ["dist/**"]
-      },
-      "dev": {
-        "persistent": true,
-        "cache": false
-      }
-    }
-  }
+	"$schema": "https://turborepo.com/schema.json",
+	"ui": "tui",
+	"tasks": {
+		"build": {
+			"outputs": ["dist/**"]
+		},
+		"dev": {
+			"persistent": true,
+			"cache": false
+		}
+	}
+}
