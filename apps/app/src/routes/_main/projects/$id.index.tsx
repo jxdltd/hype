@@ -8,20 +8,5 @@ export const Route = createFileRoute("/_main/projects/$id/")({
 function RouteComponent() {
   const { id } = Route.useParams();
 
-  return (
-    <div>
-      <button
-        type="button"
-        onClick={() =>
-          createPublicKey({
-            data: {
-              projectId: id,
-            },
-          })
-        }
-      >
-        Create Public Key
-      </button>
-    </div>
-  );
+  return <div>Stats</div>;
 }

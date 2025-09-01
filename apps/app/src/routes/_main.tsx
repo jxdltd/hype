@@ -1,4 +1,5 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import logo from "../assets/logo.png";
 
 export const Route = createFileRoute("/_main")({
   component: RouteComponent,
@@ -8,7 +9,9 @@ function RouteComponent() {
   return (
     <div className="min-h-screen bg-neutral-100 flex flex-col">
       <header className="flex items-center justify-between px-10 py-5">
-        <h1 className="font-mono">Hype</h1>
+        <Link to="/">
+          <img src={logo} alt="Hype" className="h-5" />
+        </Link>
         <nav className="flex items-center gap-4 text-sm text-neutral-500">
           <a href="#">Docs</a>
           <a href="#">Support</a>
