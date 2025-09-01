@@ -36,7 +36,7 @@ export function Waitlist() {
         type="submit"
         className="bg-white text-black px-4 py-2 hover:bg-neutral-100 cursor-pointer text-sm"
       >
-        Join
+        Join Waitlist
       </button>
     </form>
   );

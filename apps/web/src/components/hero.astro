@@ -1,0 +1,19 @@
+---
+import { Waitlist } from "./waitlist";
+---
+
+<div class="flex flex-col items-center justify-center w-full max-w-xl mx-auto">
+  <p
+    class="text-xl md:text-2xl lg:text-3xl font-black mb-4 text-center text-balance"
+  >
+    Pre-launch toolkit for developers
+  </p>
+  <p class="max-w-lg text-center text-balance mb-10">
+    Hype is an open-source platform for developers to manage their demand for
+    early access to their products. Easily add waitlists, referals, onboarding
+    and payments with Hype.
+  </p>
+  <div class="mb-10">
+    <Waitlist client:load />
+  </div>
+</div>
