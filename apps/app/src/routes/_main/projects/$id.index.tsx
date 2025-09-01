@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { createPublicKey } from "~/keys";
 
-export const Route = createFileRoute("/projects/$id")({
+export const Route = createFileRoute("/_main/projects/$id/")({
   component: RouteComponent,
 });
 

@@ -12,9 +12,12 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignUpRouteImport } from './routes/sign-up'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as MainRouteImport } from './routes/_main'
+import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as ProjectsNewRouteImport } from './routes/projects/new'
-import { Route as ProjectsIdRouteImport } from './routes/projects/$id'
+import { Route as MainProjectsRouteImport } from './routes/_main/projects'
+import { Route as MainProjectsIdIndexRouteImport } from './routes/_main/projects/$id.index'
+import { Route as MainProjectsIdProspectsRouteImport } from './routes/_main/projects/$id.prospects'
 import { ServerRoute as ApiWaitlistServerRouteImport } from './routes/api/waitlist'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth.$'
 
@@ -25,20 +28,34 @@ const SignUpRoute = SignUpRouteImport.update({
   path: '/sign-up',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const MainRoute = MainRouteImport.update({
+  id: '/_main',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MainIndexRoute = MainIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => MainRoute,
 } as any)
 const ProjectsNewRoute = ProjectsNewRouteImport.update({
   id: '/projects/new',
   path: '/projects/new',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsIdRoute = ProjectsIdRouteImport.update({
-  id: '/projects/$id',
-  path: '/projects/$id',
-  getParentRoute: () => rootRouteImport,
+const MainProjectsRoute = MainProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => MainRoute,
+} as any)
+const MainProjectsIdIndexRoute = MainProjectsIdIndexRouteImport.update({
+  id: '/$id/',
+  path: '/$id/',
+  getParentRoute: () => MainProjectsRoute,
+} as any)
+const MainProjectsIdProspectsRoute = MainProjectsIdProspectsRouteImport.update({
+  id: '/$id/prospects',
+  path: '/$id/prospects',
+  getParentRoute: () => MainProjectsRoute,
 } as any)
 const ApiWaitlistServerRoute = ApiWaitlistServerRouteImport.update({
   id: '/api/waitlist',
@@ -52,36 +69,62 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/sign-up': typeof SignUpRoute
-  '/projects/$id': typeof ProjectsIdRoute
+  '/projects': typeof MainProjectsRouteWithChildren
   '/projects/new': typeof ProjectsNewRoute
+  '/': typeof MainIndexRoute
+  '/projects/$id/prospects': typeof MainProjectsIdProspectsRoute
+  '/projects/$id': typeof MainProjectsIdIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/sign-up': typeof SignUpRoute
-  '/projects/$id': typeof ProjectsIdRoute
+  '/projects': typeof MainProjectsRouteWithChildren
   '/projects/new': typeof ProjectsNewRoute
+  '/': typeof MainIndexRoute
+  '/projects/$id/prospects': typeof MainProjectsIdProspectsRoute
+  '/projects/$id': typeof MainProjectsIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_main': typeof MainRouteWithChildren
   '/sign-up': typeof SignUpRoute
-  '/projects/$id': typeof ProjectsIdRoute
+  '/_main/projects': typeof MainProjectsRouteWithChildren
   '/projects/new': typeof ProjectsNewRoute
+  '/_main/': typeof MainIndexRoute
+  '/_main/projects/$id/prospects': typeof MainProjectsIdProspectsRoute
+  '/_main/projects/$id/': typeof MainProjectsIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-up' | '/projects/$id' | '/projects/new'
+  fullPaths:
+    | '/sign-up'
+    | '/projects'
+    | '/projects/new'
+    | '/'
+    | '/projects/$id/prospects'
+    | '/projects/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-up' | '/projects/$id' | '/projects/new'
-  id: '__root__' | '/' | '/sign-up' | '/projects/$id' | '/projects/new'
+  to:
+    | '/sign-up'
+    | '/projects'
+    | '/projects/new'
+    | '/'
+    | '/projects/$id/prospects'
+    | '/projects/$id'
+  id:
+    | '__root__'
+    | '/_main'
+    | '/sign-up'
+    | '/_main/projects'
+    | '/projects/new'
+    | '/_main/'
+    | '/_main/projects/$id/prospects'
+    | '/_main/projects/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  MainRoute: typeof MainRouteWithChildren
   SignUpRoute: typeof SignUpRoute
-  ProjectsIdRoute: typeof ProjectsIdRoute
   ProjectsNewRoute: typeof ProjectsNewRoute
 }
 export interface FileServerRoutesByFullPath {
@@ -119,12 +162,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignUpRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_main': {
+      id: '/_main'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof MainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_main/': {
+      id: '/_main/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof MainIndexRouteImport
+      parentRoute: typeof MainRoute
     }
     '/projects/new': {
       id: '/projects/new'
@@ -133,12 +183,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsNewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/projects/$id': {
-      id: '/projects/$id'
-      path: '/projects/$id'
+    '/_main/projects': {
+      id: '/_main/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof MainProjectsRouteImport
+      parentRoute: typeof MainRoute
+    }
+    '/_main/projects/$id/': {
+      id: '/_main/projects/$id/'
+      path: '/$id'
       fullPath: '/projects/$id'
-      preLoaderRoute: typeof ProjectsIdRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof MainProjectsIdIndexRouteImport
+      parentRoute: typeof MainProjectsRoute
+    }
+    '/_main/projects/$id/prospects': {
+      id: '/_main/projects/$id/prospects'
+      path: '/$id/prospects'
+      fullPath: '/projects/$id/prospects'
+      preLoaderRoute: typeof MainProjectsIdProspectsRouteImport
+      parentRoute: typeof MainProjectsRoute
     }
   }
 }
@@ -161,10 +225,35 @@ declare module '@tanstack/react-start/server' {
   }
 }
 
+interface MainProjectsRouteChildren {
+  MainProjectsIdProspectsRoute: typeof MainProjectsIdProspectsRoute
+  MainProjectsIdIndexRoute: typeof MainProjectsIdIndexRoute
+}
+
+const MainProjectsRouteChildren: MainProjectsRouteChildren = {
+  MainProjectsIdProspectsRoute: MainProjectsIdProspectsRoute,
+  MainProjectsIdIndexRoute: MainProjectsIdIndexRoute,
+}
+
+const MainProjectsRouteWithChildren = MainProjectsRoute._addFileChildren(
+  MainProjectsRouteChildren,
+)
+
+interface MainRouteChildren {
+  MainProjectsRoute: typeof MainProjectsRouteWithChildren
+  MainIndexRoute: typeof MainIndexRoute
+}
+
+const MainRouteChildren: MainRouteChildren = {
+  MainProjectsRoute: MainProjectsRouteWithChildren,
+  MainIndexRoute: MainIndexRoute,
+}
+
+const MainRouteWithChildren = MainRoute._addFileChildren(MainRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  MainRoute: MainRouteWithChildren,
   SignUpRoute: SignUpRoute,
-  ProjectsIdRoute: ProjectsIdRoute,
   ProjectsNewRoute: ProjectsNewRoute,
 }
 export const routeTree = rootRouteImport

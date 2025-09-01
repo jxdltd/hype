@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
@@ -74,6 +75,11 @@ export const project = pgTable("project", {
     .references(() => user.id, { onDelete: "cascade" }),
 });
 
+export const projectRelations = relations(project, ({ many }) => ({
+  publicKeys: many(publicKey),
+  prospects: many(prospect),
+}));
+
 export const publicKey = pgTable("public_key", {
   id: text("id").primaryKey(),
   key: text("key").notNull().unique(),
@@ -88,6 +94,13 @@ export const publicKey = pgTable("public_key", {
     .references(() => project.id, { onDelete: "cascade" }),
 });
 
+export const publicKeyRelations = relations(publicKey, ({ one }) => ({
+  project: one(project, {
+    fields: [publicKey.projectId],
+    references: [project.id],
+  }),
+}));
+
 export const prospect = pgTable("prospect", {
   id: text("id").primaryKey(),
   email: text("email").notNull(),
@@ -101,3 +114,10 @@ export const prospect = pgTable("prospect", {
     .notNull()
     .references(() => project.id, { onDelete: "cascade" }),
 });
+
+export const prospectRelations = relations(prospect, ({ one }) => ({
+  project: one(project, {
+    fields: [prospect.projectId],
+    references: [project.id],
+  }),
+}));
