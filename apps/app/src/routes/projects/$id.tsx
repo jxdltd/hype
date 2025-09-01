@@ -1,9 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { createPublicKey } from "~/keys";
 
 export const Route = createFileRoute("/projects/$id")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <div>Hello "/projects/$id"!</div>;
+  const { id } = Route.useParams();
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() =>
+          createPublicKey({
+            data: {
+              projectId: id,
+            },
+          })
+        }
+      >
+        Create Public Key
+      </button>
+    </div>
+  );
 }
