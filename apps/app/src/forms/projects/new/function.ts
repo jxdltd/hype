@@ -1,15 +1,10 @@
-import {
-  createServerValidate,
-  ServerValidateError,
-} from "@tanstack/react-form/start";
-import { formOpts, formSchema } from "./options";
-import { createServerFn } from "@tanstack/react-start";
-import { setResponseStatus } from "@tanstack/react-start/server";
-import { getFormData } from "@tanstack/react-form/start";
 import { db } from "@repo/database";
 import { project } from "@repo/database/schema";
-import { getAuth } from "../../../auth";
+import { createServerValidate, getFormData } from "@tanstack/react-form/start";
 import { redirect } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { getAuth } from "../../../auth";
+import { formOpts, formSchema } from "./options";
 
 const serverValidate = createServerValidate({
   ...formOpts,
@@ -33,32 +28,18 @@ export const handleForm = createServerFn({
     }
 
     const id = crypto.randomUUID();
-    try {
-      const validatedData = await serverValidate(ctx.data);
-      console.log("validatedData", validatedData);
+    const validatedData = await serverValidate(ctx.data);
 
-      await db
-        .insert(project)
-        .values({
-          id,
-          name: validatedData.name,
-          userId: auth.user.id,
-        })
-        .returning();
-    } catch (e) {
-      if (e instanceof ServerValidateError) {
-        // Log form errors or do any other logic here
-        // return e.response;
-        return "Problem";
-      }
+    await db
+      .insert(project)
+      .values({
+        id,
+        name: validatedData.name,
+        userId: auth.user.id,
+      })
+      .returning();
 
-      // Some other error occurred when parsing the form
-      console.error(e);
-      setResponseStatus(500);
-      return "There was an internal error";
-    }
-
-    return redirect({ to: "/projects/$id", params: { id } });
+    throw redirect({ to: "/projects/$id", params: { id } });
   });
 
 export const getFormDataFromServer = createServerFn({ method: "GET" }).handler(
