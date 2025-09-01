@@ -5,5 +5,9 @@ export const Route = createFileRoute("/projects/$id")({
 });
 
 function RouteComponent() {
-  return <div>Hello "/projects/$id"!</div>;
+  return (
+    <div>
+      <button type="button">Create Public Key</button>
+    </div>
+  );
 }
