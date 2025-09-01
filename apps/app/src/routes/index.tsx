@@ -1,48 +1,41 @@
-// src/routes/index.tsx
-import * as fs from "node:fs";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-
-const filePath = "count.txt";
+import { db } from "@repo/database";
+import { testTable } from "@repo/database/schema";
 
 async function readCount() {
-	return parseInt(
-		await fs.promises.readFile(filePath, "utf-8").catch(() => "0"),
-	);
+  return await db.select().from(testTable);
 }
 
 const getCount = createServerFn({
-	method: "GET",
+  method: "GET",
 }).handler(() => {
-	return readCount();
+  return readCount().then((res) => res.length);
 });
 
-const updateCount = createServerFn({ method: "POST" })
-	.validator((d: number) => d)
-	.handler(async ({ data }) => {
-		const count = await readCount();
-		await fs.promises.writeFile(filePath, `${count + data}`);
-	});
+const updateCount = createServerFn({ method: "POST" }).handler(async () => {
+  await db.insert(testTable).values({});
+});
 
 export const Route = createFileRoute("/")({
-	component: Home,
-	loader: async () => await getCount(),
+  component: Home,
+  loader: async () => await getCount(),
 });
 
 function Home() {
-	const router = useRouter();
-	const state = Route.useLoaderData();
+  const router = useRouter();
+  const state = Route.useLoaderData();
 
-	return (
-		<button
-			type="button"
-			onClick={() => {
-				updateCount({ data: 1 }).then(() => {
-					router.invalidate();
-				});
-			}}
-		>
-			Add 1 to {state}?
-		</button>
-	);
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        updateCount().then(() => {
+          router.invalidate();
+        });
+      }}
+    >
+      Add 1 to {state}?
+    </button>
+  );
 }
