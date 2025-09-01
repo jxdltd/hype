@@ -9,6 +9,7 @@
 	"dependencies": {
 		"@repo/database": "workspace:*",
 		"@t3-oss/env-core": "^0.13.8",
+		"@tabler/icons-react": "^3.34.1",
 		"@tailwindcss/vite": "^4.1.12",
 		"@tanstack/react-form": "^1.19.3",
 		"@tanstack/react-router": "^1.131.30",

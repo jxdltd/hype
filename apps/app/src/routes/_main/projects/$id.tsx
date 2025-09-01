@@ -71,6 +71,13 @@ function RouteComponent() {
             params={{ id }}
             activeProps={{ className: "font-medium text-black" }}
           >
+            Messages
+          </Link>
+          <Link
+            to="/projects/$id/settings"
+            params={{ id }}
+            activeProps={{ className: "font-medium text-black" }}
+          >
             Settings
           </Link>
         </div>

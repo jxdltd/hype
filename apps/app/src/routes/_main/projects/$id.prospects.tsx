@@ -1,5 +1,6 @@
 import { and, db, eq } from "@repo/database";
 import { project } from "@repo/database/schema";
+import { IconCircleCheckFilled } from "@tabler/icons-react";
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { getAuth } from "~/auth";
@@ -53,9 +54,25 @@ function RouteComponent() {
   const { project } = Route.useLoaderData();
 
   return (
-    <div>
+    <div className="px-10 flex flex-col">
+      <div className="grid grid-cols-3 gap-4 p-3 -mx-3">
+        <div className="text-sm font-medium text-neutral-500">Email</div>
+        <div className="text-sm font-medium text-neutral-500">Created At</div>
+        <div className="text-sm font-medium text-neutral-500">Verified</div>
+      </div>
       {project.prospects.map((prospect) => (
-        <div key={prospect.id}>{prospect.email}</div>
+        <div
+          className="grid grid-cols-3 gap-4 p-3 -mx-3 rounded-lg"
+          key={prospect.id}
+        >
+          <div className="text-sm">{prospect.email}</div>
+          <div className="text-sm" key={prospect.id}>
+            5 minutes ago
+          </div>
+          <div className="text-sm" key={prospect.id}>
+            <IconCircleCheckFilled className="size-4 text-green-600" />
+          </div>
+        </div>
       ))}
     </div>
   );
