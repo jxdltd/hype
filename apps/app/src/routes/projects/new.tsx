@@ -1,15 +1,10 @@
+import { mergeForm, useForm, useTransform } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   getFormDataFromServer,
   handleForm,
-} from "../../forms/projects/new/function";
-import {
-  mergeForm,
-  useForm,
-  useStore,
-  useTransform,
-} from "@tanstack/react-form";
-import { formOpts } from "../../forms/projects/new/options";
+} from "~/forms/projects/new/function";
+import { formOpts } from "~/forms/projects/new/options";
 
 export const Route = createFileRoute("/projects/new")({
   component: RouteComponent,
@@ -24,10 +19,6 @@ function RouteComponent() {
     ...formOpts,
     transform: useTransform((baseForm) => mergeForm(baseForm, state), [state]),
   });
-
-  const formErrors = useStore(form.store, (formState) => formState.errors);
-
-  console.log(formErrors);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-neutral-50">
