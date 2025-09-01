@@ -5,10 +5,8 @@ import {
   createRootRoute,
   HeadContent,
   Scripts,
-  redirect,
 } from "@tanstack/react-router";
 import globalCss from "../global.css?url";
-import { getAuth } from "../auth";
 
 export const Route = createRootRoute({
   head: () => ({

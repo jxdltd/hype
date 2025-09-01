@@ -13,6 +13,8 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProjectsNewRouteImport } from './routes/projects/new'
+import { Route as ProjectsIdRouteImport } from './routes/projects/$id'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth.$'
 
 const rootServerRouteImport = createServerRootRoute()
@@ -27,6 +29,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsNewRoute = ProjectsNewRouteImport.update({
+  id: '/projects/new',
+  path: '/projects/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIdRoute = ProjectsIdRouteImport.update({
+  id: '/projects/$id',
+  path: '/projects/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -36,27 +48,35 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sign-up': typeof SignUpRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/projects/new': typeof ProjectsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sign-up': typeof SignUpRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/projects/new': typeof ProjectsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/sign-up': typeof SignUpRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/projects/new': typeof ProjectsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-up'
+  fullPaths: '/' | '/sign-up' | '/projects/$id' | '/projects/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-up'
-  id: '__root__' | '/' | '/sign-up'
+  to: '/' | '/sign-up' | '/projects/$id' | '/projects/new'
+  id: '__root__' | '/' | '/sign-up' | '/projects/$id' | '/projects/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SignUpRoute: typeof SignUpRoute
+  ProjectsIdRoute: typeof ProjectsIdRoute
+  ProjectsNewRoute: typeof ProjectsNewRoute
 }
 export interface FileServerRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatServerRoute
@@ -96,6 +116,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects/new': {
+      id: '/projects/new'
+      path: '/projects/new'
+      fullPath: '/projects/new'
+      preLoaderRoute: typeof ProjectsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/$id': {
+      id: '/projects/$id'
+      path: '/projects/$id'
+      fullPath: '/projects/$id'
+      preLoaderRoute: typeof ProjectsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 declare module '@tanstack/react-start/server' {
@@ -113,6 +147,8 @@ declare module '@tanstack/react-start/server' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SignUpRoute: SignUpRoute,
+  ProjectsIdRoute: ProjectsIdRoute,
+  ProjectsNewRoute: ProjectsNewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
