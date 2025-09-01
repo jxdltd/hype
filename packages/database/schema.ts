@@ -87,3 +87,17 @@ export const publicKey = pgTable("public_key", {
     .notNull()
     .references(() => project.id, { onDelete: "cascade" }),
 });
+
+export const prospect = pgTable("prospect", {
+  id: text("id").primaryKey(),
+  email: text("email").notNull(),
+  createdAt: timestamp("created_at").$defaultFn(
+    () => /* @__PURE__ */ new Date()
+  ),
+  updatedAt: timestamp("updated_at").$defaultFn(
+    () => /* @__PURE__ */ new Date()
+  ),
+  projectId: text("project_id")
+    .notNull()
+    .references(() => project.id, { onDelete: "cascade" }),
+});
