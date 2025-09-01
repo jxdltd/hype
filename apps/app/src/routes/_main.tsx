@@ -13,7 +13,11 @@ function RouteComponent() {
           <img src={logo} alt="Hype" className="h-5" />
         </Link>
         <nav className="flex items-center gap-4 text-sm text-neutral-500">
-          <a href="https://docs.buildhype.dev" target="_blank" rel="noopener">
+          <a
+            href="https://docs.buildhype.dev/docs"
+            target="_blank"
+            rel="noopener"
+          >
             Docs
           </a>
           <a href="#">Support</a>
