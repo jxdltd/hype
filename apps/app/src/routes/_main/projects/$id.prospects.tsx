@@ -55,14 +55,17 @@ function RouteComponent() {
 
   return (
     <div className="px-10 flex flex-col">
-      <div className="grid grid-cols-3 gap-4 p-3 -mx-3">
+      <div className="grid grid-cols-4 gap-4 p-3 -mx-3">
         <div className="text-sm font-medium text-neutral-500">Email</div>
         <div className="text-sm font-medium text-neutral-500">Created At</div>
+        <div className="text-sm font-medium text-neutral-500">
+          Last Messaged
+        </div>
         <div className="text-sm font-medium text-neutral-500">Verified</div>
       </div>
       {project.prospects.map((prospect) => (
         <div
-          className="grid grid-cols-3 gap-4 p-3 -mx-3 rounded-lg"
+          className="grid grid-cols-4 gap-4 p-3 -mx-3 rounded-lg"
           key={prospect.id}
         >
           <div className="text-sm">{prospect.email}</div>
@@ -70,7 +73,10 @@ function RouteComponent() {
             5 minutes ago
           </div>
           <div className="text-sm" key={prospect.id}>
-            <IconCircleCheckFilled className="size-4 text-green-600" />
+            Never
+          </div>
+          <div className="text-sm" key={prospect.id}>
+            <IconCircleCheckFilled className="size-5 text-green-600" />
           </div>
         </div>
       ))}
