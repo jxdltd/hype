@@ -7,10 +7,24 @@ const bodySchema = z.object({
   email: z.email(),
 });
 
+// CORS headers helper
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, x-api-key",
+  "Access-Control-Max-Age": "86400",
+};
+
 export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
   //   GET: ({ request }) => {
   //     return auth.handler(request);
   //   },
+  OPTIONS: () => {
+    return new Response(null, {
+      status: 200,
+      headers: corsHeaders,
+    });
+  },
   POST: async ({ request }) => {
     // validate api key
     // parse body
@@ -20,7 +34,10 @@ export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
     const apiKey = request.headers.get("x-api-key");
 
     if (!apiKey) {
-      return new Response("Unauthorized", { status: 401 });
+      return new Response("Unauthorized", {
+        status: 401,
+        headers: corsHeaders,
+      });
     }
 
     const body = bodySchema.parse(await request.json());
@@ -30,7 +47,10 @@ export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
     });
 
     if (!found) {
-      return new Response("Unauthorized", { status: 401 });
+      return new Response("Unauthorized", {
+        status: 401,
+        headers: corsHeaders,
+      });
     }
 
     await db.insert(prospect).values({
@@ -39,6 +59,8 @@ export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
       projectId: found.projectId,
     });
 
-    return new Response("OK");
+    return new Response("OK", {
+      headers: corsHeaders,
+    });
   },
 });
