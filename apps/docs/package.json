@@ -9,12 +9,13 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.34.1",
+    "fumadocs-core": "15.7.7",
+    "fumadocs-mdx": "11.8.2",
+    "fumadocs-ui": "15.7.7",
     "next": "15.5.2",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "fumadocs-ui": "15.7.7",
-    "fumadocs-core": "15.7.7",
-    "fumadocs-mdx": "11.8.2"
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@types/node": "24.3.0",
