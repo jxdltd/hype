@@ -38,7 +38,9 @@
       "name": "web",
       "version": "0.0.1",
       "dependencies": {
+        "@tailwindcss/vite": "^4.1.12",
         "astro": "^5.13.5",
+        "tailwindcss": "^4.1.12",
       },
     },
     "packages/auth": {

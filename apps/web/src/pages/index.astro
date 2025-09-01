@@ -1,5 +1,5 @@
 ---
-
+import "../styles/global.css";
 ---
 
 <html lang="en">
@@ -8,9 +8,12 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Hype</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="bg-neutral-900 text-white min-h-screen flex flex-col items-center justify-center p-10">
+		<h1 class="text-lg font-medium font-mono mb-10">Hype</h1>
+		<p class="text-xl font-black mb-3 text-center text-balance">Demand management for developers</p>
+		<p class="max-w-lg text-center text-balance mb-10">Hype is an open-source platform for developers to manage their demand for early access to their products. Easily add waitlists, referals, onboarding and payments with Hype.</p>
+		<a href="https://github.com/jxdltd/hype" target="_blank" class="bg-white text-black px-4 py-2 rounded-md font-medium">Github</a>
 	</body>
 </html>
