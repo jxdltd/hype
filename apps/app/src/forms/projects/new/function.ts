@@ -1,19 +1,19 @@
-// app/routes/index.tsx, but can be extracted to any other path
 import {
   createServerValidate,
   ServerValidateError,
 } from "@tanstack/react-form/start";
-import { formOpts } from "./options";
+import { formOpts, formSchema } from "./options";
 import { createServerFn } from "@tanstack/react-start";
 import { setResponseStatus } from "@tanstack/react-start/server";
+import { getFormData } from "@tanstack/react-form/start";
+import { db } from "@repo/database";
+import { project } from "@repo/database/schema";
+import { getAuth } from "../../../auth";
+import { redirect } from "@tanstack/react-router";
 
 const serverValidate = createServerValidate({
   ...formOpts,
-  onServerValidate: ({ value }) => {
-    // if (value.age < 12) {
-    //   return "Server validation: You must be at least 12 to sign up";
-    // }
-  },
+  onServerValidate: formSchema,
 });
 
 export const handleForm = createServerFn({
@@ -60,13 +60,6 @@ export const handleForm = createServerFn({
 
     return redirect({ to: "/projects/$id", params: { id } });
   });
-
-// app/routes/index.tsx, but can be extracted to any other path
-import { getFormData } from "@tanstack/react-form/start";
-import { db } from "@repo/database";
-import { project } from "@repo/database/schema";
-import { getAuth } from "../../../auth";
-import { redirect } from "@tanstack/react-router";
 
 export const getFormDataFromServer = createServerFn({ method: "GET" }).handler(
   async () => {
