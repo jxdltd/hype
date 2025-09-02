@@ -1,8 +1,68 @@
 ---
 title: React
-description: Learn how to use the Hype React SDK
+description: Easily add a waitlist to your React application.
 ---
 
-import {Banner} from "fumadocs-ui/components/banner";
+Our headless React components allow you to easily add a waitlist in a few lines of code while keeping full control over the UI.
 
-<Banner>Work in progress</Banner>
+To get started you'll need to get a public API key from the [Hype](https://www.buildhype.dev/) dashboard.
+
+## Install `@buildhype/react`
+
+```bash
+npm install @buildhype/react
+```
+
+## Setup
+
+```tsx
+import {
+  Waitlist,
+  WaitlistEmail,
+  WaitlistSubmit,
+  WaitlistSuccess,
+} from "@buildhype/react";
+
+
+export function App() {
+  return (
+    <Waitlist apiKey="your-api-key">
+        <WaitlistEmail />
+        <WaitlistSubmit>Join Waitlist</WaitlistSubmit>
+        <WaitlistSuccess>
+        Thank you for joining the waitlist!
+        </WaitlistSuccess>
+    </Waitlist>
+  );
+}
+```
+
+## Styling
+
+Here's an example from the [Hype](https://www.buildhype.dev/) website using Tailwind.
+
+```tsx
+import {
+  Waitlist as HypeWaitlist,
+  WaitlistEmail,
+  WaitlistSubmit,
+  WaitlistSuccess,
+} from "@buildhype/react";
+
+export function Waitlist() {
+  return (
+    <HypeWaitlist
+      className="flex gap-2 items-stretch"
+      apiKey={import.meta.env.PUBLIC_HYPE_KEY}
+    >
+      <WaitlistEmail className="border border-neutral-700 p-2 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm" />
+      <WaitlistSubmit className="bg-white text-black px-4 py-2 hover:bg-neutral-100 cursor-pointer text-sm">
+        Join Waitlist
+      </WaitlistSubmit>
+      <WaitlistSuccess className="text-sm font-medium">
+        Thank you for joining the waitlist!
+      </WaitlistSuccess>
+    </HypeWaitlist>
+  );
+}
+```

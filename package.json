@@ -17,5 +17,8 @@
 		"apps/*",
 		"packages/*"
 	],
-	"packageManager": "bun@1.2.21"
+	"packageManager": "bun@1.2.21",
+	"dependencies": {
+		"@changesets/cli": "^2.29.6"
+	}
 }

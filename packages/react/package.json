@@ -1,16 +1,21 @@
 {
     "name": "@buildhype/react",
     "type": "module",
+    "version": "0.1.0",
+    "files": [
+    "dist",
+    "src"
+  ],
     "scripts": {
         "dev": "bun run ./scripts/build.ts",
         "build": "NODE_ENV=production bun run ./scripts/build.ts"
     },
     "exports": {
-    "default": {
-      "types": "./src/index.tsx",
-      "default": "./dist/index.js"
-    }
-  },
+        "default": {
+            "types": "./src/index.tsx",
+            "default": "./dist/index.js"
+        }
+    },
     "dependencies": {
         "react": "^19.1.1"
     },
