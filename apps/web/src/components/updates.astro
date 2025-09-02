@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+
+const updates = await getCollection("updates");
+---
+
+<div class="w-full max-w-xl mx-auto">
+  {
+    updates.map((update) => (
+      <a
+        href={`/updates/${update.id}`}
+        class="p-4 -mx-4 hover:bg-neutral-800 flex flex-col gap-1"
+      >
+        <p class="flex items-center gap-2">
+          <span class="text-sm text-neutral-400">{update.data.date.toLocaleDateString()}</span>
+          {update.data.title}
+        </p>
+        <p class="text-sm text-neutral-400">{update.data.description}</p>
+      </a>
+    ))
+  }
+</div>

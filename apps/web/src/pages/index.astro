@@ -1,21 +1,13 @@
 ---
 import Features from "../components/features.astro";
-import Header from "../components/header.astro";
 import Hero from "../components/hero.astro";
+import Updates from "../components/updates.astro";
 import "../styles/global.css";
+import BaseLayout from "../layouts/base.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Hype</title>
-  </head>
-  <body class="bg-neutral-900 text-white p-10 flex flex-col min-h-screen gap-20">
-    <Header />
-    <Hero />
-    <Features />
-  </body>
-</html>
+<BaseLayout>
+  <Hero />
+  <Features />
+  <Updates />
+</BaseLayout>
