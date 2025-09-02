@@ -1,0 +1,1 @@
+import{R as e,j as o,L as i}from"./main-BNT9XLv-.js";function a(){const{projects:s}=e.useLoaderData();return o.jsx("div",{children:s.map(n=>o.jsx("div",{children:o.jsx(i,{to:"/projects/$id",params:{id:n.id},children:n.name})},n.id))})}export{a as component};
