@@ -8,6 +8,7 @@ import {
   redirect,
 } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
+import demo from "~/assets/demo.png?url";
 import { getAuth } from "~/auth";
 
 const fetchProject = createServerFn()
@@ -55,9 +56,15 @@ function RouteComponent() {
   return (
     <div>
       <div className="flex items-center justify-between px-10 py-5">
-        <Link to="/projects/$id" params={{ id }} className="font-medium">
-          {project.name}
-        </Link>
+        <div className="flex items-center gap-2">
+          <img src={demo} alt="demo" className="size-8 rounded h-auto " />
+          <div>
+            <Link to="/projects/$id" params={{ id }} className="font-medium">
+              {project.name}
+            </Link>
+            <p className="text-xs text-neutral-500">6 Prospects</p>
+          </div>
+        </div>
         <div className="text-sm text-neutral-500 flex items-center gap-4">
           <Link
             to="/projects/$id/prospects"
@@ -70,8 +77,19 @@ function RouteComponent() {
             to="/projects/$id/settings"
             params={{ id }}
             activeProps={{ className: "font-medium text-black" }}
+            className="flex items-center gap-1"
           >
-            Messages
+            <span>Messages</span>
+            <span className="text-xs size-5 flex items-center justify-center bg-blue-100 text-blue-500 rounded-full font-medium">
+              5
+            </span>
+          </Link>
+          <Link
+            to="/projects/$id/settings"
+            params={{ id }}
+            activeProps={{ className: "font-medium text-black" }}
+          >
+            API
           </Link>
           <Link
             to="/projects/$id/settings"

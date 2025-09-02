@@ -6,4 +6,5 @@ await Bun.build({
   external: ["react"],
   banner: '"use client";',
   minify: true,
+  // watch: true, 🥺
 });
