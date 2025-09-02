@@ -54,9 +54,10 @@ export function Waitlist({ children, className, apiKey }: WaitlistProps) {
 
 type WaitlistEmailProps = {
   className?: string;
+  placeholder?: string;
 };
 
-export function WaitlistEmail({ className }: WaitlistEmailProps) {
+export function WaitlistEmail({ className, placeholder }: WaitlistEmailProps) {
   const { submitted, email, setEmail } = useWaitlistContext();
 
   if (submitted) {
@@ -69,6 +70,7 @@ export function WaitlistEmail({ className }: WaitlistEmailProps) {
       type="email"
       value={email}
       onChange={(e) => setEmail(e.target.value)}
+      placeholder={placeholder}
     />
   );
 }
