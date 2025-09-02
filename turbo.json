@@ -6,7 +6,7 @@
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
-			"outputs": ["dist/**"]
+			"outputs": ["dist/**", ".vercel", ".nitro", ".output", ".tanstack"]
 		},
 		"dev": {
 			"persistent": true,
