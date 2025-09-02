@@ -46,4 +46,4 @@ export function Waitlist() {
 
 ## Documentation
 
-See our complete React documentation [here](https://www.buildhype.dev/docs/waitlist/react).
+See our complete React documentation [here](https://docs.buildhype.dev/docs/waitlist/react).
