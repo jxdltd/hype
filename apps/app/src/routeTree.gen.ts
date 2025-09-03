@@ -24,6 +24,7 @@ import { ServerRoute as ApiWaitlistServerRouteImport } from './routes/api/waitli
 import { ServerRoute as ApiVerifyServerRouteImport } from './routes/api/verify'
 import { ServerRoute as ApiInngestServerRouteImport } from './routes/api/inngest'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth.$'
+import { ServerRoute as ApiAccessEmailServerRouteImport } from './routes/api/access.$email'
 
 const rootServerRouteImport = createServerRootRoute()
 
@@ -89,6 +90,11 @@ const ApiInngestServerRoute = ApiInngestServerRouteImport.update({
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
+  getParentRoute: () => rootServerRouteImport,
+} as any)
+const ApiAccessEmailServerRoute = ApiAccessEmailServerRouteImport.update({
+  id: '/api/access/$email',
+  path: '/api/access/$email',
   getParentRoute: () => rootServerRouteImport,
 } as any)
 
@@ -166,12 +172,14 @@ export interface FileServerRoutesByFullPath {
   '/api/inngest': typeof ApiInngestServerRoute
   '/api/verify': typeof ApiVerifyServerRoute
   '/api/waitlist': typeof ApiWaitlistServerRoute
+  '/api/access/$email': typeof ApiAccessEmailServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesByTo {
   '/api/inngest': typeof ApiInngestServerRoute
   '/api/verify': typeof ApiVerifyServerRoute
   '/api/waitlist': typeof ApiWaitlistServerRoute
+  '/api/access/$email': typeof ApiAccessEmailServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesById {
@@ -179,18 +187,30 @@ export interface FileServerRoutesById {
   '/api/inngest': typeof ApiInngestServerRoute
   '/api/verify': typeof ApiVerifyServerRoute
   '/api/waitlist': typeof ApiWaitlistServerRoute
+  '/api/access/$email': typeof ApiAccessEmailServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRouteTypes {
   fileServerRoutesByFullPath: FileServerRoutesByFullPath
-  fullPaths: '/api/inngest' | '/api/verify' | '/api/waitlist' | '/api/auth/$'
+  fullPaths:
+    | '/api/inngest'
+    | '/api/verify'
+    | '/api/waitlist'
+    | '/api/access/$email'
+    | '/api/auth/$'
   fileServerRoutesByTo: FileServerRoutesByTo
-  to: '/api/inngest' | '/api/verify' | '/api/waitlist' | '/api/auth/$'
+  to:
+    | '/api/inngest'
+    | '/api/verify'
+    | '/api/waitlist'
+    | '/api/access/$email'
+    | '/api/auth/$'
   id:
     | '__root__'
     | '/api/inngest'
     | '/api/verify'
     | '/api/waitlist'
+    | '/api/access/$email'
     | '/api/auth/$'
   fileServerRoutesById: FileServerRoutesById
 }
@@ -198,6 +218,7 @@ export interface RootServerRouteChildren {
   ApiInngestServerRoute: typeof ApiInngestServerRoute
   ApiVerifyServerRoute: typeof ApiVerifyServerRoute
   ApiWaitlistServerRoute: typeof ApiWaitlistServerRoute
+  ApiAccessEmailServerRoute: typeof ApiAccessEmailServerRoute
   ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
 }
 
@@ -298,6 +319,13 @@ declare module '@tanstack/react-start/server' {
       preLoaderRoute: typeof ApiAuthSplatServerRouteImport
       parentRoute: typeof rootServerRouteImport
     }
+    '/api/access/$email': {
+      id: '/api/access/$email'
+      path: '/api/access/$email'
+      fullPath: '/api/access/$email'
+      preLoaderRoute: typeof ApiAccessEmailServerRouteImport
+      parentRoute: typeof rootServerRouteImport
+    }
   }
 }
 
@@ -342,6 +370,7 @@ const rootServerRouteChildren: RootServerRouteChildren = {
   ApiInngestServerRoute: ApiInngestServerRoute,
   ApiVerifyServerRoute: ApiVerifyServerRoute,
   ApiWaitlistServerRoute: ApiWaitlistServerRoute,
+  ApiAccessEmailServerRoute: ApiAccessEmailServerRoute,
   ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
 }
 export const serverRouteTree = rootServerRouteImport

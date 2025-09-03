@@ -1,0 +1,19 @@
+{
+    "name": "@buildhype/better-auth",
+    "type": "module",
+    "version": "0.1.0",
+    "files": [
+        "dist",
+        "src"
+    ],
+    "scripts": {
+        "build": "NODE_ENV=production bun run ./scripts/build.ts"
+    },
+    "dependencies": {
+        "better-auth": "^1.3.7",
+        "react": "^19.1.1"
+    },
+    "devDependencies": {
+        "@types/react": "^19.1.12"
+    }
+}

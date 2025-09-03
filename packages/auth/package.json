@@ -4,6 +4,7 @@
     "type": "module",
     "scripts": {},
     "dependencies": {
+        "@buildhype/better-auth": "workspace:*",
         "@repo/database": "workspace:*",
         "@t3-oss/env-core": "^0.13.8",
         "better-auth": "^1.3.7",

@@ -1,3 +1,4 @@
+import { hypePlugin } from "@buildhype/better-auth";
 import { db } from "@repo/database";
 import * as schema from "@repo/database/schema";
 import { betterAuth } from "better-auth";
@@ -12,5 +13,5 @@ export const auth = betterAuth({
     provider: "pg",
     schema,
   }),
-  plugins: [reactStartCookies()],
+  plugins: [reactStartCookies(), hypePlugin({ apiKey: "123" })],
 });

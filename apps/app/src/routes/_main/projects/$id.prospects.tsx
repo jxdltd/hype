@@ -60,7 +60,7 @@ function RouteComponent() {
 
   return (
     <div className="px-10 flex flex-col">
-      <div className="grid grid-cols-5 gap-4 p-3 -mx-3">
+      <div className="grid grid-cols-6 gap-4 p-3 -mx-3">
         <div className="text-sm font-medium text-neutral-500">Email</div>
         <div className="text-sm font-medium text-neutral-500">Signed Up</div>
         <div className="text-sm font-medium text-neutral-500">
@@ -69,11 +69,14 @@ function RouteComponent() {
         <div className="text-sm font-medium text-neutral-500">
           Email Verified
         </div>
+        <div className="text-sm font-medium text-neutral-500">
+          Access Granted
+        </div>
         <div className="text-sm font-medium text-neutral-500">Stage</div>
       </div>
       {project.prospects.map((prospect) => (
         <div
-          className="grid grid-cols-5 gap-4 p-3 -mx-3 rounded-lg"
+          className="grid grid-cols-6 gap-4 p-3 -mx-3 rounded-lg"
           key={prospect.id}
         >
           <div className="text-sm">{prospect.email}</div>
@@ -81,6 +84,13 @@ function RouteComponent() {
           <div className="text-sm">Never</div>
           <div className="text-sm">
             {prospect.emailVerified ? (
+              <IconCircleCheckFilled className="size-4 text-green-500" />
+            ) : (
+              <IconCircleXFilled className="size-4 text-red-500" />
+            )}
+          </div>
+          <div className="text-sm">
+            {prospect.accessGranted ? (
               <IconCircleCheckFilled className="size-4 text-green-500" />
             ) : (
               <IconCircleXFilled className="size-4 text-red-500" />

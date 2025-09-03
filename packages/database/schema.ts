@@ -122,6 +122,7 @@ export const prospect = pgTable("prospect", {
     .notNull()
     .references(() => project.id, { onDelete: "cascade" }),
   emailVerified: boolean("email_verified").default(false).notNull(),
+  accessGranted: boolean("access_granted").default(false).notNull(),
 });
 
 export const prospectRelations = relations(prospect, ({ one, many }) => ({
