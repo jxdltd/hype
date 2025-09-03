@@ -11,6 +11,7 @@
 import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VerifiedRouteImport } from './routes/verified'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as MainRouteImport } from './routes/_main'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
@@ -20,11 +21,17 @@ import { Route as MainProjectsIdIndexRouteImport } from './routes/_main/projects
 import { Route as MainProjectsIdSettingsRouteImport } from './routes/_main/projects/$id.settings'
 import { Route as MainProjectsIdProspectsRouteImport } from './routes/_main/projects/$id.prospects'
 import { ServerRoute as ApiWaitlistServerRouteImport } from './routes/api/waitlist'
+import { ServerRoute as ApiVerifyServerRouteImport } from './routes/api/verify'
 import { ServerRoute as ApiInngestServerRouteImport } from './routes/api/inngest'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth.$'
 
 const rootServerRouteImport = createServerRootRoute()
 
+const VerifiedRoute = VerifiedRouteImport.update({
+  id: '/verified',
+  path: '/verified',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignUpRoute = SignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
@@ -69,6 +76,11 @@ const ApiWaitlistServerRoute = ApiWaitlistServerRouteImport.update({
   path: '/api/waitlist',
   getParentRoute: () => rootServerRouteImport,
 } as any)
+const ApiVerifyServerRoute = ApiVerifyServerRouteImport.update({
+  id: '/api/verify',
+  path: '/api/verify',
+  getParentRoute: () => rootServerRouteImport,
+} as any)
 const ApiInngestServerRoute = ApiInngestServerRouteImport.update({
   id: '/api/inngest',
   path: '/api/inngest',
@@ -82,6 +94,7 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/sign-up': typeof SignUpRoute
+  '/verified': typeof VerifiedRoute
   '/projects/new': typeof ProjectsNewRoute
   '/': typeof MainIndexRoute
   '/projects/$id': typeof MainProjectsIdRouteWithChildren
@@ -91,6 +104,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/sign-up': typeof SignUpRoute
+  '/verified': typeof VerifiedRoute
   '/projects/new': typeof ProjectsNewRoute
   '/': typeof MainIndexRoute
   '/projects/$id/prospects': typeof MainProjectsIdProspectsRoute
@@ -101,6 +115,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_main': typeof MainRouteWithChildren
   '/sign-up': typeof SignUpRoute
+  '/verified': typeof VerifiedRoute
   '/projects/new': typeof ProjectsNewRoute
   '/_main/': typeof MainIndexRoute
   '/_main/projects/$id': typeof MainProjectsIdRouteWithChildren
@@ -112,6 +127,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/sign-up'
+    | '/verified'
     | '/projects/new'
     | '/'
     | '/projects/$id'
@@ -121,6 +137,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/sign-up'
+    | '/verified'
     | '/projects/new'
     | '/'
     | '/projects/$id/prospects'
@@ -130,6 +147,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_main'
     | '/sign-up'
+    | '/verified'
     | '/projects/new'
     | '/_main/'
     | '/_main/projects/$id'
@@ -141,40 +159,57 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   MainRoute: typeof MainRouteWithChildren
   SignUpRoute: typeof SignUpRoute
+  VerifiedRoute: typeof VerifiedRoute
   ProjectsNewRoute: typeof ProjectsNewRoute
 }
 export interface FileServerRoutesByFullPath {
   '/api/inngest': typeof ApiInngestServerRoute
+  '/api/verify': typeof ApiVerifyServerRoute
   '/api/waitlist': typeof ApiWaitlistServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesByTo {
   '/api/inngest': typeof ApiInngestServerRoute
+  '/api/verify': typeof ApiVerifyServerRoute
   '/api/waitlist': typeof ApiWaitlistServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesById {
   __root__: typeof rootServerRouteImport
   '/api/inngest': typeof ApiInngestServerRoute
+  '/api/verify': typeof ApiVerifyServerRoute
   '/api/waitlist': typeof ApiWaitlistServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRouteTypes {
   fileServerRoutesByFullPath: FileServerRoutesByFullPath
-  fullPaths: '/api/inngest' | '/api/waitlist' | '/api/auth/$'
+  fullPaths: '/api/inngest' | '/api/verify' | '/api/waitlist' | '/api/auth/$'
   fileServerRoutesByTo: FileServerRoutesByTo
-  to: '/api/inngest' | '/api/waitlist' | '/api/auth/$'
-  id: '__root__' | '/api/inngest' | '/api/waitlist' | '/api/auth/$'
+  to: '/api/inngest' | '/api/verify' | '/api/waitlist' | '/api/auth/$'
+  id:
+    | '__root__'
+    | '/api/inngest'
+    | '/api/verify'
+    | '/api/waitlist'
+    | '/api/auth/$'
   fileServerRoutesById: FileServerRoutesById
 }
 export interface RootServerRouteChildren {
   ApiInngestServerRoute: typeof ApiInngestServerRoute
+  ApiVerifyServerRoute: typeof ApiVerifyServerRoute
   ApiWaitlistServerRoute: typeof ApiWaitlistServerRoute
   ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/verified': {
+      id: '/verified'
+      path: '/verified'
+      fullPath: '/verified'
+      preLoaderRoute: typeof VerifiedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sign-up': {
       id: '/sign-up'
       path: '/sign-up'
@@ -242,6 +277,13 @@ declare module '@tanstack/react-start/server' {
       preLoaderRoute: typeof ApiWaitlistServerRouteImport
       parentRoute: typeof rootServerRouteImport
     }
+    '/api/verify': {
+      id: '/api/verify'
+      path: '/api/verify'
+      fullPath: '/api/verify'
+      preLoaderRoute: typeof ApiVerifyServerRouteImport
+      parentRoute: typeof rootServerRouteImport
+    }
     '/api/inngest': {
       id: '/api/inngest'
       path: '/api/inngest'
@@ -290,6 +332,7 @@ const MainRouteWithChildren = MainRoute._addFileChildren(MainRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   MainRoute: MainRouteWithChildren,
   SignUpRoute: SignUpRoute,
+  VerifiedRoute: VerifiedRoute,
   ProjectsNewRoute: ProjectsNewRoute,
 }
 export const routeTree = rootRouteImport
@@ -297,6 +340,7 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 const rootServerRouteChildren: RootServerRouteChildren = {
   ApiInngestServerRoute: ApiInngestServerRoute,
+  ApiVerifyServerRoute: ApiVerifyServerRoute,
   ApiWaitlistServerRoute: ApiWaitlistServerRoute,
   ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
 }

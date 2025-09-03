@@ -66,7 +66,9 @@ function RouteComponent() {
         <div className="text-sm font-medium text-neutral-500">
           Last Messaged
         </div>
-        <div className="text-sm font-medium text-neutral-500">Email</div>
+        <div className="text-sm font-medium text-neutral-500">
+          Email Verified
+        </div>
         <div className="text-sm font-medium text-neutral-500">Stage</div>
       </div>
       {project.prospects.map((prospect) => (
@@ -78,10 +80,11 @@ function RouteComponent() {
           <div className="text-sm">5 minutes ago</div>
           <div className="text-sm">Never</div>
           <div className="text-sm">
-            <p className="text-xs flex items-center justify-center gap-1 bg-green-100 text-green-500 rounded-full font-medium py-1 px-2 w-min">
-              <IconCircleCheckFilled className="size-4 text-white-600" />
-              <span>Verified</span>
-            </p>
+            {prospect.emailVerified ? (
+              <IconCircleCheckFilled className="size-4 text-green-500" />
+            ) : (
+              <IconCircleXFilled className="size-4 text-red-500" />
+            )}
           </div>
           <p className="text-xs flex items-center justify-center gap-1 bg-blue-100 text-blue-500 rounded-full font-medium py-1 px-2 w-min">
             <span>Waitlist</span>

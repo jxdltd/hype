@@ -121,11 +121,38 @@ export const prospect = pgTable("prospect", {
   projectId: text("project_id")
     .notNull()
     .references(() => project.id, { onDelete: "cascade" }),
+  emailVerified: boolean("email_verified").default(false).notNull(),
 });
 
-export const prospectRelations = relations(prospect, ({ one }) => ({
+export const prospectRelations = relations(prospect, ({ one, many }) => ({
   project: one(project, {
     fields: [prospect.projectId],
     references: [project.id],
   }),
+  emailVerification: many(emailVerification),
 }));
+
+export const emailVerification = pgTable("email_verification", {
+  id: text("id").primaryKey(),
+  code: text("code").notNull().unique(),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").$defaultFn(
+    () => /* @__PURE__ */ new Date()
+  ),
+  updatedAt: timestamp("updated_at").$defaultFn(
+    () => /* @__PURE__ */ new Date()
+  ),
+  prospectId: text("prospect_id")
+    .notNull()
+    .references(() => prospect.id, { onDelete: "cascade" }),
+});
+
+export const emailVerificationRelations = relations(
+  emailVerification,
+  ({ one }) => ({
+    prospect: one(prospect, {
+      fields: [emailVerification.prospectId],
+      references: [prospect.id],
+    }),
+  })
+);
