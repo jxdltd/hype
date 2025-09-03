@@ -1,13 +1,14 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Waitlist } from "../../components/waitlist";
 import BaseLayout from "../../layouts/base.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("updates");
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
-  }));
+	const posts = await getCollection("updates");
+	return posts.map((post) => ({
+		params: { id: post.id },
+		props: { post },
+	}));
 }
 
 const { post } = Astro.props;
@@ -22,8 +23,12 @@ const { Content } = await render(post);
 >
   <div class="w-full max-w-xl mx-auto">
     <h1 class="text-2xl font-bold">{post.data.title}</h1>
-    <div class="prose prose-invert">
+    <div class="prose prose-invert mb-20">
       <Content />
+    </div>
+    <div class="p-10 flex flex-col gap-4 items-center justify-center bg-neutral-800">
+      <div class="text-lg font-bold">Get started with Hype</div>
+      <Waitlist client:load />
     </div>
   </div>
 </BaseLayout>
