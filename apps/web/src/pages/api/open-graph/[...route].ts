@@ -3,7 +3,9 @@ import { OGImageRoute } from "astro-og-canvas";
 
 const updates = await getCollection("updates");
 
-const pages = Object.fromEntries(updates.map(({ id, data }) => [id, data]));
+const pages = Object.fromEntries(
+  updates.map(({ id, data }) => [`updates/${id}`, data])
+);
 
 console.log(pages);
 
