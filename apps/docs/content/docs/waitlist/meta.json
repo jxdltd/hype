@@ -3,6 +3,7 @@
         "react",
         "vue",
         "svelte",
+        "email-verification",
         "notifications"
     ]
 }

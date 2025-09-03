@@ -10,4 +10,4 @@ We've recently added the ability to send email notifications when a prospect joi
 
 ## Documentation
 
-See our complete React documentation [here](https://docs.buildhype.dev/docs/waitlist/notifications).
+See our complete documentation [here](https://docs.buildhype.dev/docs/waitlist/notifications).
