@@ -17,6 +17,10 @@ export const user = pgTable("user", {
     .notNull(),
 });
 
+export const userRelations = relations(user, ({ many }) => ({
+  projects: many(project),
+}));
+
 export const session = pgTable("session", {
   id: text("id").primaryKey(),
   expiresAt: timestamp("expires_at").notNull(),
@@ -75,9 +79,13 @@ export const project = pgTable("project", {
     .references(() => user.id, { onDelete: "cascade" }),
 });
 
-export const projectRelations = relations(project, ({ many }) => ({
+export const projectRelations = relations(project, ({ many, one }) => ({
   publicKeys: many(publicKey),
   prospects: many(prospect),
+  user: one(user, {
+    fields: [project.userId],
+    references: [user.id],
+  }),
 }));
 
 export const publicKey = pgTable("public_key", {

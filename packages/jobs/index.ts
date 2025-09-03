@@ -1,8 +1,7 @@
-
-
 import { createServerFileRoute } from "@tanstack/react-start/server";
 import { InngestCommHandler, type ServeHandlerOptions } from "inngest";
 import { inngest } from "./client";
+import { newProspect } from "./prospects/new";
 import { helloWorld } from "./test";
 
 const serve = (options: ServeHandlerOptions) => {
@@ -27,4 +26,7 @@ const serve = (options: ServeHandlerOptions) => {
   return handler.createHandler();
 };
 
-export const handler = serve({ client: inngest, functions: [helloWorld] });
+export const handler = serve({
+  client: inngest,
+  functions: [helloWorld, newProspect],
+});

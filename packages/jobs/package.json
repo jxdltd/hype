@@ -5,6 +5,7 @@
     "scripts": {
     },
     "dependencies": {
+        "@repo/mail": "workspace:*",
         "@repo/database": "workspace:*",
         "@t3-oss/env-core": "^0.13.8",
         "inngest": "^3.40.2",
