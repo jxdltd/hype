@@ -29,28 +29,26 @@ export function NewProspectEmail({ project, prospect }: Props) {
           display: "flex",
           flexDirection: "column",
           gap: "16px",
-          alignItems: "center",
-          padding: "16px",
-          textAlign: "center",
+          padding: "32px",
         }}
       >
         <Img
           src="https://www.buildhype.dev/logo.png"
           alt="Hype"
-          style={{ height: "24px", margin: "0 auto" }}
+          style={{ height: "16px" }}
         />
-        <Text style={{ fontSize: "24px", fontWeight: "bold" }}>
-          New Prospect
+        <Text style={{ fontSize: "20px", fontWeight: "bold" }}>
+          Congratulations! You have a new prospect
         </Text>
         <Text style={{ fontSize: "16px" }}>
-          Congratulations! You have a new prospect{" "}
           <Link
             href={`mailto:${prospect.email}`}
-            style={{ fontWeight: "bold" }}
+            style={{ fontWeight: "bolder" }}
           >
             {prospect.email}
           </Link>{" "}
-          for your project {project.name}.
+          has joined the waiting list for{" "}
+          <Text style={{ fontWeight: "bolder" }}>{project.name}</Text>.
         </Text>
         <Button
           href={`https://app.buildhype.dev/projects/${project.id}/prospects`}
@@ -58,9 +56,8 @@ export function NewProspectEmail({ project, prospect }: Props) {
             background: "#000",
             color: "#fff",
             padding: "8px 16px",
-            borderRadius: "8px",
-            fontSize: "16px",
-            fontWeight: "bold",
+            fontSize: "14px",
+            fontWeight: "bolder",
           }}
         >
           View Prospects
