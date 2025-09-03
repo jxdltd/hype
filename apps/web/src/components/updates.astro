@@ -2,11 +2,13 @@
 import { getCollection } from "astro:content";
 
 const updates = await getCollection("updates");
+
+const sortedUpdates = updates.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <div class="w-full max-w-xl mx-auto">
   {
-    updates.map((update) => (
+    sortedUpdates.map((update) => (
       <a
         href={`/updates/${update.id}`}
         class="p-4 -mx-4 hover:bg-neutral-800 flex flex-col gap-1"
