@@ -1,5 +1,6 @@
 import { db, eq } from "@repo/database";
 import { prospect, publicKey } from "@repo/database/schema";
+import { inngest } from "@repo/jobs/client";
 import { createServerFileRoute } from "@tanstack/react-start/server";
 import z from "zod";
 
@@ -16,9 +17,6 @@ const corsHeaders = {
 };
 
 export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
-  //   GET: ({ request }) => {
-  //     return auth.handler(request);
-  //   },
   OPTIONS: () => {
     return new Response(null, {
       status: 200,
@@ -26,11 +24,6 @@ export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
     });
   },
   POST: async ({ request }) => {
-    // validate api key
-    // parse body
-    // insert into waitlist
-    // return 200
-
     const apiKey = request.headers.get("x-api-key");
 
     if (!apiKey) {
@@ -53,11 +46,21 @@ export const ServerRoute = createServerFileRoute("/api/waitlist").methods({
       });
     }
 
+    const id = crypto.randomUUID();
     await db.insert(prospect).values({
-      id: crypto.randomUUID(),
+      id,
       email: body.email,
       projectId: found.projectId,
     });
+
+    await inngest.send({
+      name: "prospect/created",
+      data: {
+        prospect: {
+          id,
+        },
+      },
+    })
 
     return new Response("OK", {
       headers: corsHeaders,
