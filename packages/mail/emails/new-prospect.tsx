@@ -47,8 +47,7 @@ export function NewProspectEmail({ project, prospect }: Props) {
           >
             {prospect.email}
           </Link>{" "}
-          has joined the waiting list for{" "}
-          <Text style={{ fontWeight: "bolder" }}>{project.name}</Text>.
+          has joined the waiting list for {project.name}.
         </Text>
         <Button
           href={`https://app.buildhype.dev/projects/${project.id}/prospects`}
