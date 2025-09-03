@@ -1,8 +1,26 @@
 ---
 title: Better Auth
-description: Learn how to configure the Hype Better Auth plugin.
+description: Learn how to control access to your app with our Better Auth plugin.
 ---
 
-import {Banner} from "fumadocs-ui/components/banner";
+We provide a helpful Better Auth plugin that lets you control access to your app based on whether a prospect has been granted access or not.
 
-<Banner>Work in progress</Banner>
+## Install `@buildhype/better-auth`
+
+```bash
+npm install @buildhype/better-auth
+```
+
+## Setup
+
+In your server file add the following:
+
+```ts
+import { hypePlugin } from "@buildhype/better-auth";
+
+export const auth = betterAuth({
+  plugins: [hypePlugin({ apiKey: "your-secret-api-key" })],
+});
+```
+
+Now you can grant access to a prospect or batch in the dashboard allowing them to sign up while all other users are prevented from doing so.
