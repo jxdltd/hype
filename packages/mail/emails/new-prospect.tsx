@@ -4,6 +4,7 @@ import {
   Head,
   Html,
   Img,
+  Link,
   Text,
 } from "@react-email/components";
 
@@ -12,9 +13,12 @@ type Props = {
     id: string;
     name: string;
   };
+  prospect: {
+    email: string;
+  };
 };
 
-export function NewProspectEmail({ project }: Props) {
+export function NewProspectEmail({ project, prospect }: Props) {
   return (
     <Html>
       <Head>
@@ -39,8 +43,14 @@ export function NewProspectEmail({ project }: Props) {
           New Prospect
         </Text>
         <Text style={{ fontSize: "16px" }}>
-          Congratulations! You have a new prospect for your project{" "}
-          {project.name}.
+          Congratulations! You have a new prospect{" "}
+          <Link
+            href={`mailto:${prospect.email}`}
+            style={{ fontWeight: "bold" }}
+          >
+            {prospect.email}
+          </Link>{" "}
+          for your project {project.name}.
         </Text>
         <Button
           href={`https://app.buildhype.dev/projects/${project.id}/prospects`}
@@ -61,5 +71,10 @@ export function NewProspectEmail({ project }: Props) {
 }
 
 export default function Example() {
-  return <NewProspectEmail project={{ id: "1", name: "Project 1" }} />;
+  return (
+    <NewProspectEmail
+      project={{ id: "1", name: "Project 1" }}
+      prospect={{ email: "test@test.com" }}
+    />
+  );
 }
