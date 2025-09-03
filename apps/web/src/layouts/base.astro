@@ -1,6 +1,15 @@
 ---
 import Header from "../components/header.astro";
 import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+}
+
+const { title, description, image, url } = Astro.props;
 ---
 
 <html lang="en">
@@ -9,9 +18,49 @@ import "../styles/global.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Hype</title>
+
+    <!-- HTML Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content={title} />
+    <meta itemprop="description" content={description} />
+    <meta
+      itemprop="image"
+      content={image}
+    />
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content={description}
+    />
+    <meta
+      property="og:image"
+      content={image}
+    />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta
+      name="twitter:description"
+      content={description}
+    />
+    <meta
+      name="twitter:image"
+      content={image}
+    />
+
+    <!-- Meta Tags Generated via https://heymeta.com -->
   </head>
-  <body class="bg-neutral-900 text-white p-10 flex flex-col min-h-screen gap-20">
+  <body
+    class="bg-neutral-900 text-white p-10 flex flex-col min-h-screen gap-20"
+  >
     <Header />
     <slot />
   </body>

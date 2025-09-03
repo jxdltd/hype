@@ -14,7 +14,12 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={`${post.data.title} – Hype`}
+  description={post.data.description}
+  image={`https://www.buildhype.dev/api/open-graph/updates/${post.id}.png`}
+  url={`https://www.buildhype.dev/updates/${post.id}`}
+>
   <div class="w-full max-w-xl mx-auto">
     <h1 class="text-2xl font-bold">{post.data.title}</h1>
     <div class="prose prose-invert">
