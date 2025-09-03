@@ -20,6 +20,7 @@ import { Route as MainProjectsIdIndexRouteImport } from './routes/_main/projects
 import { Route as MainProjectsIdSettingsRouteImport } from './routes/_main/projects/$id.settings'
 import { Route as MainProjectsIdProspectsRouteImport } from './routes/_main/projects/$id.prospects'
 import { ServerRoute as ApiWaitlistServerRouteImport } from './routes/api/waitlist'
+import { ServerRoute as ApiInngestServerRouteImport } from './routes/api/inngest'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth.$'
 
 const rootServerRouteImport = createServerRootRoute()
@@ -66,6 +67,11 @@ const MainProjectsIdProspectsRoute = MainProjectsIdProspectsRouteImport.update({
 const ApiWaitlistServerRoute = ApiWaitlistServerRouteImport.update({
   id: '/api/waitlist',
   path: '/api/waitlist',
+  getParentRoute: () => rootServerRouteImport,
+} as any)
+const ApiInngestServerRoute = ApiInngestServerRouteImport.update({
+  id: '/api/inngest',
+  path: '/api/inngest',
   getParentRoute: () => rootServerRouteImport,
 } as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
@@ -138,27 +144,31 @@ export interface RootRouteChildren {
   ProjectsNewRoute: typeof ProjectsNewRoute
 }
 export interface FileServerRoutesByFullPath {
+  '/api/inngest': typeof ApiInngestServerRoute
   '/api/waitlist': typeof ApiWaitlistServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesByTo {
+  '/api/inngest': typeof ApiInngestServerRoute
   '/api/waitlist': typeof ApiWaitlistServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesById {
   __root__: typeof rootServerRouteImport
+  '/api/inngest': typeof ApiInngestServerRoute
   '/api/waitlist': typeof ApiWaitlistServerRoute
   '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRouteTypes {
   fileServerRoutesByFullPath: FileServerRoutesByFullPath
-  fullPaths: '/api/waitlist' | '/api/auth/$'
+  fullPaths: '/api/inngest' | '/api/waitlist' | '/api/auth/$'
   fileServerRoutesByTo: FileServerRoutesByTo
-  to: '/api/waitlist' | '/api/auth/$'
-  id: '__root__' | '/api/waitlist' | '/api/auth/$'
+  to: '/api/inngest' | '/api/waitlist' | '/api/auth/$'
+  id: '__root__' | '/api/inngest' | '/api/waitlist' | '/api/auth/$'
   fileServerRoutesById: FileServerRoutesById
 }
 export interface RootServerRouteChildren {
+  ApiInngestServerRoute: typeof ApiInngestServerRoute
   ApiWaitlistServerRoute: typeof ApiWaitlistServerRoute
   ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
 }
@@ -232,6 +242,13 @@ declare module '@tanstack/react-start/server' {
       preLoaderRoute: typeof ApiWaitlistServerRouteImport
       parentRoute: typeof rootServerRouteImport
     }
+    '/api/inngest': {
+      id: '/api/inngest'
+      path: '/api/inngest'
+      fullPath: '/api/inngest'
+      preLoaderRoute: typeof ApiInngestServerRouteImport
+      parentRoute: typeof rootServerRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -279,6 +296,7 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 const rootServerRouteChildren: RootServerRouteChildren = {
+  ApiInngestServerRoute: ApiInngestServerRoute,
   ApiWaitlistServerRoute: ApiWaitlistServerRoute,
   ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
 }
