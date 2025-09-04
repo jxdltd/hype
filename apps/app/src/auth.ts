@@ -1,5 +1,6 @@
 import { auth } from "@repo/auth/server";
-import { createServerFn } from "@tanstack/react-start";
+import { redirect } from "@tanstack/react-router";
+import { createMiddleware, createServerFn } from "@tanstack/react-start";
 import { getWebRequest } from "@tanstack/react-start/server";
 
 export const getAuth = createServerFn().handler(async () => {
@@ -21,4 +22,20 @@ export const getAuth = createServerFn().handler(async () => {
     session: resp.session,
     user: resp.user,
   };
+});
+
+export const authenticatedMiddleware = createMiddleware({
+  type: "function",
+}).server(async ({ next }) => {
+  const auth = await getAuth();
+
+  if (!auth) {
+    throw redirect({ to: "/sign-in" });
+  }
+
+  return next({
+    context: {
+      ...auth,
+    },
+  });
 });

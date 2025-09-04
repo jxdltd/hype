@@ -1,31 +1,11 @@
-import { db, eq } from "@repo/database";
-import { project } from "@repo/database/schema";
 import {
   IconBrowser,
   IconMessageCircleFilled,
   IconUserFilled,
 } from "@tabler/icons-react";
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-import { createProject } from "~/projects";
+import { createProject, fetchProjects } from "~/projects";
 import { getAuth } from "../../auth";
-
-const fetchProjects = createServerFn().handler(async () => {
-  const auth = await getAuth();
-
-  if (!auth) {
-    throw new Error("No auth found");
-  }
-
-  const projects = await db.query.project.findMany({
-    where: eq(project.userId, auth.user.id),
-    with: {
-      prospects: true,
-    },
-  });
-
-  return projects;
-});
 
 export const Route = createFileRoute("/_main/")({
   component: RouteComponent,
