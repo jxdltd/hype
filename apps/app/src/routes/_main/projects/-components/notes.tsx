@@ -7,7 +7,7 @@ export function Notes() {
     content: "<p>Hello World!</p>", // initial content
     editorProps: {
       attributes: {
-        class: "focus:outline-none prose prose-sm",
+        class: "focus:outline-none prose prose-sm max-w-none",
       },
     },
   });

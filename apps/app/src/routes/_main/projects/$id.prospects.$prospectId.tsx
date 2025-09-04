@@ -1,5 +1,5 @@
-import { and, db, eq } from "@repo/database";
-import { project, prospect } from "@repo/database/schema";
+import { db, eq } from "@repo/database";
+import { prospect } from "@repo/database/schema";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import z from "zod";
