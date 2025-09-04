@@ -41,7 +41,7 @@ const fetchProject = createServerFn()
     });
   });
 
-export const Route = createFileRoute("/_main/projects/$id/prospects")({
+export const Route = createFileRoute("/_main/projects/$id/prospects/")({
   component: RouteComponent,
   loader: async ({ params }) => {
     const auth = await getAuth();
@@ -103,7 +103,14 @@ function RouteComponent() {
           className="grid grid-cols-6 gap-4 p-3 -mx-3 rounded-lg"
           key={prospect.id}
         >
-          <div className="text-sm">{prospect.email}</div>
+          <div className="text-sm">
+            <Link
+              to="/projects/$id/prospects/$prospectId"
+              params={{ id: project.id, prospectId: prospect.id }}
+            >
+              {prospect.email}
+            </Link>
+          </div>
           <div className="text-sm">5 minutes ago</div>
           <div className="text-sm">Never</div>
           <div className="text-sm">

@@ -20,7 +20,8 @@ import { Route as ProjectsNewRouteImport } from './routes/projects/new'
 import { Route as MainProjectsIdRouteImport } from './routes/_main/projects/$id'
 import { Route as MainProjectsIdIndexRouteImport } from './routes/_main/projects/$id.index'
 import { Route as MainProjectsIdSettingsRouteImport } from './routes/_main/projects/$id.settings'
-import { Route as MainProjectsIdProspectsRouteImport } from './routes/_main/projects/$id.prospects'
+import { Route as MainProjectsIdProspectsIndexRouteImport } from './routes/_main/projects/$id.prospects.index'
+import { Route as MainProjectsIdProspectsProspectIdRouteImport } from './routes/_main/projects/$id.prospects.$prospectId'
 import { ServerRoute as ApiWaitlistServerRouteImport } from './routes/api/waitlist'
 import { ServerRoute as ApiVerifyServerRouteImport } from './routes/api/verify'
 import { ServerRoute as ApiInngestServerRouteImport } from './routes/api/inngest'
@@ -73,11 +74,18 @@ const MainProjectsIdSettingsRoute = MainProjectsIdSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => MainProjectsIdRoute,
 } as any)
-const MainProjectsIdProspectsRoute = MainProjectsIdProspectsRouteImport.update({
-  id: '/prospects',
-  path: '/prospects',
-  getParentRoute: () => MainProjectsIdRoute,
-} as any)
+const MainProjectsIdProspectsIndexRoute =
+  MainProjectsIdProspectsIndexRouteImport.update({
+    id: '/prospects/',
+    path: '/prospects/',
+    getParentRoute: () => MainProjectsIdRoute,
+  } as any)
+const MainProjectsIdProspectsProspectIdRoute =
+  MainProjectsIdProspectsProspectIdRouteImport.update({
+    id: '/prospects/$prospectId',
+    path: '/prospects/$prospectId',
+    getParentRoute: () => MainProjectsIdRoute,
+  } as any)
 const ApiWaitlistServerRoute = ApiWaitlistServerRouteImport.update({
   id: '/api/waitlist',
   path: '/api/waitlist',
@@ -111,9 +119,10 @@ export interface FileRoutesByFullPath {
   '/projects/new': typeof ProjectsNewRoute
   '/': typeof MainIndexRoute
   '/projects/$id': typeof MainProjectsIdRouteWithChildren
-  '/projects/$id/prospects': typeof MainProjectsIdProspectsRoute
   '/projects/$id/settings': typeof MainProjectsIdSettingsRoute
   '/projects/$id/': typeof MainProjectsIdIndexRoute
+  '/projects/$id/prospects/$prospectId': typeof MainProjectsIdProspectsProspectIdRoute
+  '/projects/$id/prospects': typeof MainProjectsIdProspectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/sign-in': typeof SignInRoute
@@ -121,9 +130,10 @@ export interface FileRoutesByTo {
   '/verified': typeof VerifiedRoute
   '/projects/new': typeof ProjectsNewRoute
   '/': typeof MainIndexRoute
-  '/projects/$id/prospects': typeof MainProjectsIdProspectsRoute
   '/projects/$id/settings': typeof MainProjectsIdSettingsRoute
   '/projects/$id': typeof MainProjectsIdIndexRoute
+  '/projects/$id/prospects/$prospectId': typeof MainProjectsIdProspectsProspectIdRoute
+  '/projects/$id/prospects': typeof MainProjectsIdProspectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,9 +144,10 @@ export interface FileRoutesById {
   '/projects/new': typeof ProjectsNewRoute
   '/_main/': typeof MainIndexRoute
   '/_main/projects/$id': typeof MainProjectsIdRouteWithChildren
-  '/_main/projects/$id/prospects': typeof MainProjectsIdProspectsRoute
   '/_main/projects/$id/settings': typeof MainProjectsIdSettingsRoute
   '/_main/projects/$id/': typeof MainProjectsIdIndexRoute
+  '/_main/projects/$id/prospects/$prospectId': typeof MainProjectsIdProspectsProspectIdRoute
+  '/_main/projects/$id/prospects/': typeof MainProjectsIdProspectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -147,9 +158,10 @@ export interface FileRouteTypes {
     | '/projects/new'
     | '/'
     | '/projects/$id'
-    | '/projects/$id/prospects'
     | '/projects/$id/settings'
     | '/projects/$id/'
+    | '/projects/$id/prospects/$prospectId'
+    | '/projects/$id/prospects'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/sign-in'
@@ -157,9 +169,10 @@ export interface FileRouteTypes {
     | '/verified'
     | '/projects/new'
     | '/'
-    | '/projects/$id/prospects'
     | '/projects/$id/settings'
     | '/projects/$id'
+    | '/projects/$id/prospects/$prospectId'
+    | '/projects/$id/prospects'
   id:
     | '__root__'
     | '/_main'
@@ -169,9 +182,10 @@ export interface FileRouteTypes {
     | '/projects/new'
     | '/_main/'
     | '/_main/projects/$id'
-    | '/_main/projects/$id/prospects'
     | '/_main/projects/$id/settings'
     | '/_main/projects/$id/'
+    | '/_main/projects/$id/prospects/$prospectId'
+    | '/_main/projects/$id/prospects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -300,11 +314,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainProjectsIdSettingsRouteImport
       parentRoute: typeof MainProjectsIdRoute
     }
-    '/_main/projects/$id/prospects': {
-      id: '/_main/projects/$id/prospects'
+    '/_main/projects/$id/prospects/': {
+      id: '/_main/projects/$id/prospects/'
       path: '/prospects'
       fullPath: '/projects/$id/prospects'
-      preLoaderRoute: typeof MainProjectsIdProspectsRouteImport
+      preLoaderRoute: typeof MainProjectsIdProspectsIndexRouteImport
+      parentRoute: typeof MainProjectsIdRoute
+    }
+    '/_main/projects/$id/prospects/$prospectId': {
+      id: '/_main/projects/$id/prospects/$prospectId'
+      path: '/prospects/$prospectId'
+      fullPath: '/projects/$id/prospects/$prospectId'
+      preLoaderRoute: typeof MainProjectsIdProspectsProspectIdRouteImport
       parentRoute: typeof MainProjectsIdRoute
     }
   }
@@ -350,15 +371,18 @@ declare module '@tanstack/react-start/server' {
 }
 
 interface MainProjectsIdRouteChildren {
-  MainProjectsIdProspectsRoute: typeof MainProjectsIdProspectsRoute
   MainProjectsIdSettingsRoute: typeof MainProjectsIdSettingsRoute
   MainProjectsIdIndexRoute: typeof MainProjectsIdIndexRoute
+  MainProjectsIdProspectsProspectIdRoute: typeof MainProjectsIdProspectsProspectIdRoute
+  MainProjectsIdProspectsIndexRoute: typeof MainProjectsIdProspectsIndexRoute
 }
 
 const MainProjectsIdRouteChildren: MainProjectsIdRouteChildren = {
-  MainProjectsIdProspectsRoute: MainProjectsIdProspectsRoute,
   MainProjectsIdSettingsRoute: MainProjectsIdSettingsRoute,
   MainProjectsIdIndexRoute: MainProjectsIdIndexRoute,
+  MainProjectsIdProspectsProspectIdRoute:
+    MainProjectsIdProspectsProspectIdRoute,
+  MainProjectsIdProspectsIndexRoute: MainProjectsIdProspectsIndexRoute,
 }
 
 const MainProjectsIdRouteWithChildren = MainProjectsIdRoute._addFileChildren(
