@@ -5,11 +5,18 @@ import {
   IconCircleDot,
   IconCircleX,
   IconCircleXFilled,
+  IconPlus,
 } from "@tabler/icons-react";
-import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  notFound,
+  redirect,
+} from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { getAuth } from "~/auth";
 import { env } from "~/env";
+import { NewProspect } from "./-components/new-prospect";
 
 const fetchProject = createServerFn()
   .validator((data: unknown) => {
@@ -59,20 +66,24 @@ export const Route = createFileRoute("/_main/projects/$id/prospects")({
 function RouteComponent() {
   const { project } = Route.useLoaderData();
 
-  if (project.prospects.length === 0) {
-    return (
-      <div className="text-center p-10 text-sm text-neutral-500">
-        No prospects found! Read the{" "}
-        <a href={env().VITE_DOCS_URL} className="text-blue-500">
-          docs
-        </a>{" "}
-        to learn how to get started.
-      </div>
-    );
-  }
+  // if (project.prospects.length === 0) {
+  //   return (
+  //     <div className="text-center p-10 text-sm text-neutral-500">
+  //       No prospects found! Read the{" "}
+  //       <a href={env().VITE_DOCS_URL} className="text-blue-500">
+  //         docs
+  //       </a>{" "}
+  //       to learn how to get started.
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="px-10 flex flex-col">
+      <div className="flex items-center gap-4 justify-between mb-4">
+        <h1 className="text-2xl font-bold">Prospects</h1>
+        <NewProspect projectId={project.id} />
+      </div>
       <div className="grid grid-cols-6 gap-4 p-3 -mx-3">
         <div className="text-sm font-medium text-neutral-500">Email</div>
         <div className="text-sm font-medium text-neutral-500">Signed Up</div>
