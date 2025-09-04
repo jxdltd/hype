@@ -27,6 +27,9 @@ const fetchProject = createServerFn()
 
     return db.query.project.findFirst({
       where: eq(project.id, data),
+      with: {
+        prospects: true,
+      },
     });
   });
 
@@ -62,7 +65,9 @@ function RouteComponent() {
             <Link to="/projects/$id" params={{ id }} className="font-medium">
               {project.name}
             </Link>
-            <p className="text-xs text-neutral-500">6 Prospects</p>
+            <p className="text-xs text-neutral-500">
+              {project.prospects.length} Prospects
+            </p>
           </div>
         </div>
         <div className="text-sm text-neutral-500 flex items-center gap-4">
