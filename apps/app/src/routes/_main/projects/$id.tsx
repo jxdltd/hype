@@ -60,7 +60,7 @@ function RouteComponent() {
     <div>
       <div className="flex items-center justify-between px-10 py-5">
         <div className="flex items-center gap-2">
-          <img src={demo} alt="demo" className="size-8 rounded h-auto " />
+          {/* <img src={demo} alt="demo" className="size-8 rounded h-auto " /> */}
           <div>
             <Link to="/projects/$id" params={{ id }} className="font-medium">
               {project.name}

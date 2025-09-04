@@ -1,8 +1,4 @@
-import {
-  IconBrowser,
-  IconMessageCircleFilled,
-  IconUserFilled,
-} from "@tabler/icons-react";
+import { IconMessageCircleFilled, IconUserFilled } from "@tabler/icons-react";
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { createProject, fetchProjects } from "~/projects";
 import { getAuth } from "../../auth";
@@ -45,9 +41,6 @@ function RouteComponent() {
           className="bg-white rounded-lg p-4 border border-neutral-200 shadow-xs flex gap-3 hover:bg-neutral-50"
           key={project.id}
         >
-          <div className="size-10 rounded bg-neutral-100 flex items-center justify-center text-neutral-500">
-            <IconBrowser className="size-5" />
-          </div>
           <div className="flex flex-col gap-1">
             <p className="font-medium">{project.name}</p>
             <div className="flex items-center gap-3">
