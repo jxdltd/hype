@@ -1,4 +1,10 @@
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import { auth } from "@repo/auth/client";
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  useRouter,
+} from "@tanstack/react-router";
 import logo from "../assets/logo.png";
 
 export const Route = createFileRoute("/_main")({
@@ -6,6 +12,8 @@ export const Route = createFileRoute("/_main")({
 });
 
 function RouteComponent() {
+  const router = useRouter();
+
   return (
     <div className="min-h-screen bg-neutral-100 flex flex-col">
       <header className="flex items-center justify-between px-10 py-5">
@@ -21,6 +29,16 @@ function RouteComponent() {
             Docs
           </a>
           <a href="#">Support</a>
+          <button
+            type="button"
+            onClick={() => {
+              auth.signOut().then(() => {
+                router.navigate({ to: "/sign-in" });
+              });
+            }}
+          >
+            Sign Out
+          </button>
         </nav>
       </header>
       <main className="bg-white flex-1 rounded-t-3xl border-t border-neutral-200">
