@@ -3,6 +3,7 @@ import { createAuthMiddleware } from "better-auth/plugins";
 
 type HypePluginOptions = {
   apiKey: string;
+  allowedEmails?: string[];
 };
 
 export const hypePlugin = (options: HypePluginOptions) =>
@@ -15,11 +16,9 @@ export const hypePlugin = (options: HypePluginOptions) =>
           handler: createAuthMiddleware(async (ctx) => {
             const { email } = ctx.body;
 
-            console.log("Email", email);
-            console.log(
-              "Encoded Email",
-              encodeURI(`http://localhost:3000/api/access/${email}`)
-            );
+            if (options.allowedEmails?.includes(email)) {
+              return { context: ctx };
+            }
 
             const response = await fetch(
               encodeURI(`http://localhost:3000/api/access/${email}`),
@@ -30,7 +29,6 @@ export const hypePlugin = (options: HypePluginOptions) =>
               }
             );
 
-            console.log(response);
             if (!response.ok) {
               throw new Error("No access");
             }

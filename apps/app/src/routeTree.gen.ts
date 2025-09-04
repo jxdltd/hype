@@ -13,6 +13,7 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifiedRouteImport } from './routes/verified'
 import { Route as SignUpRouteImport } from './routes/sign-up'
+import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as MainRouteImport } from './routes/_main'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as ProjectsNewRouteImport } from './routes/projects/new'
@@ -36,6 +37,11 @@ const VerifiedRoute = VerifiedRouteImport.update({
 const SignUpRoute = SignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignInRoute = SignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MainRoute = MainRouteImport.update({
@@ -99,6 +105,7 @@ const ApiAccessEmailServerRoute = ApiAccessEmailServerRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/verified': typeof VerifiedRoute
   '/projects/new': typeof ProjectsNewRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/projects/$id/': typeof MainProjectsIdIndexRoute
 }
 export interface FileRoutesByTo {
+  '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/verified': typeof VerifiedRoute
   '/projects/new': typeof ProjectsNewRoute
@@ -120,6 +128,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_main': typeof MainRouteWithChildren
+  '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/verified': typeof VerifiedRoute
   '/projects/new': typeof ProjectsNewRoute
@@ -132,6 +141,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/sign-in'
     | '/sign-up'
     | '/verified'
     | '/projects/new'
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/projects/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/sign-in'
     | '/sign-up'
     | '/verified'
     | '/projects/new'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_main'
+    | '/sign-in'
     | '/sign-up'
     | '/verified'
     | '/projects/new'
@@ -164,6 +176,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   MainRoute: typeof MainRouteWithChildren
+  SignInRoute: typeof SignInRoute
   SignUpRoute: typeof SignUpRoute
   VerifiedRoute: typeof VerifiedRoute
   ProjectsNewRoute: typeof ProjectsNewRoute
@@ -236,6 +249,13 @@ declare module '@tanstack/react-router' {
       path: '/sign-up'
       fullPath: '/sign-up'
       preLoaderRoute: typeof SignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-in': {
+      id: '/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SignInRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_main': {
@@ -359,6 +379,7 @@ const MainRouteWithChildren = MainRoute._addFileChildren(MainRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   MainRoute: MainRouteWithChildren,
+  SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
   VerifiedRoute: VerifiedRoute,
   ProjectsNewRoute: ProjectsNewRoute,

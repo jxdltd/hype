@@ -13,5 +13,8 @@ export const auth = betterAuth({
     provider: "pg",
     schema,
   }),
-  plugins: [reactStartCookies(), hypePlugin({ apiKey: "123" })],
+  plugins: [
+    reactStartCookies(),
+    hypePlugin({ apiKey: "123", allowedEmails: ["x@jxd.dev"] }),
+  ],
 });
