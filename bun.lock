@@ -18,6 +18,7 @@
     "apps/app": {
       "name": "app",
       "dependencies": {
+        "@repo/config": "workspace:*",
         "@repo/database": "workspace:*",
         "@repo/jobs": "workspace:*",
         "@repo/mail": "workspace:*",
@@ -108,6 +109,16 @@
       },
       "devDependencies": {
         "@types/react": "^19.1.12",
+      },
+    },
+    "packages/config": {
+      "name": "@repo/config",
+      "dependencies": {
+        "@t3-oss/env-core": "^0.13.8",
+        "zod": "^4.1.5",
+      },
+      "devDependencies": {
+        "typescript": "^5.9.2",
       },
     },
     "packages/database": {
@@ -895,6 +906,8 @@
     "@react-email/text": ["@react-email/text@0.1.5", "", { "peerDependencies": { "react": "^18.0 || ^19.0 || ^19.0.0-rc" } }, "sha512-o5PNHFSE085VMXayxH+SJ1LSOtGsTv+RpNKnTiJDrJUwoBu77G3PlKOsZZQHCNyD28WsQpl9v2WcJLbQudqwPg=="],
 
     "@repo/auth": ["@repo/auth@workspace:packages/auth"],
+
+    "@repo/config": ["@repo/config@workspace:packages/config"],
 
     "@repo/database": ["@repo/database@workspace:packages/database"],
 

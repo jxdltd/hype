@@ -9,6 +9,7 @@ import {
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { getAuth } from "~/auth";
+import { env } from "~/env";
 
 const fetchProject = createServerFn()
   .validator((data: unknown) => {
@@ -57,6 +58,18 @@ export const Route = createFileRoute("/_main/projects/$id/prospects")({
 
 function RouteComponent() {
   const { project } = Route.useLoaderData();
+
+  if (project.prospects.length === 0) {
+    return (
+      <div className="text-center p-10 text-sm text-neutral-500">
+        No prospects found! Read the{" "}
+        <a href={env().VITE_DOCS_URL} className="text-blue-500">
+          docs
+        </a>{" "}
+        to learn how to get started.
+      </div>
+    );
+  }
 
   return (
     <div className="px-10 flex flex-col">
