@@ -8,15 +8,18 @@
 	},
 	"dependencies": {
 		"@repo/config": "workspace:*",
-		"@repo/mail": "workspace:*",
-		"@repo/jobs": "workspace:*",
 		"@repo/database": "workspace:*",
+		"@repo/jobs": "workspace:*",
+		"@repo/mail": "workspace:*",
 		"@t3-oss/env-core": "^0.13.8",
 		"@tabler/icons-react": "^3.34.1",
 		"@tailwindcss/vite": "^4.1.12",
 		"@tanstack/react-form": "^1.19.3",
 		"@tanstack/react-router": "^1.131.30",
 		"@tanstack/react-start": "^1.131.30",
+		"@tiptap/pm": "^3.4.1",
+		"@tiptap/react": "^3.4.1",
+		"@tiptap/starter-kit": "^3.4.1",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1",
 		"tailwindcss": "^4.1.12",
@@ -24,6 +27,7 @@
 		"zod": "^4.1.5"
 	},
 	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.16",
 		"@types/react": "^19.1.12",
 		"@types/react-dom": "^19.1.9",
 		"@vitejs/plugin-react": "^5.0.2",

@@ -4,6 +4,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import z from "zod";
 import { authenticatedMiddleware } from "~/auth";
+import { Notes } from "./-components/notes";
 
 const fetchParamsSchema = z.string(); // prospectId
 
@@ -47,9 +48,11 @@ function RouteComponent() {
     <div className="px-10 flex flex-col">
       <div className="flex items-center gap-4 justify-between mb-4">
         <h1 className="text-2xl font-bold">{prospect.email}</h1>
-        <div>Actions</div>
+        {/* <div>Actions</div> */}
       </div>
-      <div>Notes</div>
+      <div>
+        <Notes />
+      </div>
     </div>
   );
 }
