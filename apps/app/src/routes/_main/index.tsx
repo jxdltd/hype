@@ -2,6 +2,7 @@ import { db, eq } from "@repo/database";
 import { project } from "@repo/database/schema";
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
+import { createProject } from "~/projects";
 import { getAuth } from "../../auth";
 
 const fetchProjects = createServerFn().handler(async () => {
@@ -28,6 +29,14 @@ export const Route = createFileRoute("/_main/")({
     }
 
     const projects = await fetchProjects();
+
+    if (projects.length === 0) {
+      const created = await createProject({
+        data: { name: "My first project" },
+      });
+
+      throw redirect({ to: "/projects/$id", params: { id: created.id } });
+    }
 
     return {
       auth,

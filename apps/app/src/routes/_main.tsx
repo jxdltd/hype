@@ -41,7 +41,7 @@ function RouteComponent() {
           </button>
         </nav>
       </header>
-      <main className="bg-white flex-1 rounded-t-3xl border-t border-neutral-200">
+      <main className="bg-white flex-1 rounded-t-3xl border-t border-neutral-200 flex flex-col">
         <Outlet />
       </main>
     </div>
