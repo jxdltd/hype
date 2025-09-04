@@ -1,37 +1,11 @@
 import { auth } from "@repo/auth/client";
-import { IconLoader } from "@tabler/icons-react";
-import { type AnyFieldApi, formOptions, useForm } from "@tanstack/react-form";
+import { IconLoader2 } from "@tabler/icons-react";
+import { useForm } from "@tanstack/react-form";
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import z from "zod";
 import logo from "~/assets/logo.png?url";
-
-const formSchema = z.object({
-  email: z.email("Provide a valid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-});
-
-const formOpts = formOptions({
-  defaultValues: {
-    email: "",
-    password: "",
-  },
-});
-
-function FieldError({ field }: { field: AnyFieldApi }) {
-  if (field.state.meta.isValid) {
-    return null;
-  }
-
-  console.log(field.state.meta.errors);
-
-  return (
-    <p className="text-red-500 text-xs font-medium">
-      {field.state.meta.errors.map((error) => (
-        <span key={error as unknown as string}>{error?.message}</span>
-      ))}
-    </p>
-  );
-}
+import { FieldError } from "~/components/form/field-error";
+import { formOpts, formSchema } from "~/forms/auth";
+import { cn } from "~/utils/cn";
 
 export const Route = createFileRoute("/sign-up")({
   component: RouteComponent,
@@ -109,11 +83,14 @@ function RouteComponent() {
           {([isSubmitting]) => (
             <button
               type="submit"
-              className="w-full p-2 rounded-md bg-neutral-900 text-white text-sm font-medium hover:bg-neutral-800 cursor-pointer"
+              className={cn(
+                "w-full p-2 rounded-md bg-neutral-900 text-white text-sm font-medium hover:bg-neutral-800 cursor-pointer h-10 flex items-center justify-center",
+                isSubmitting && "bg-neutral-800"
+              )}
               disabled={isSubmitting}
             >
               {isSubmitting ? (
-                <IconLoader className="animate-spin size-4" />
+                <IconLoader2 className="animate-spin size-4" />
               ) : (
                 "Sign Up"
               )}
