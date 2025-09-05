@@ -44,6 +44,7 @@ Hype is built with cutting-edge technologies:
 ## Integrations
 
 - [@buildhype/react](https://www.npmjs.com/package/@buildhype/react)
+- [@buildhype/svelte](https://www.npmjs.com/package/@buildhype/svelte)
 
 ## Stargazers
 
