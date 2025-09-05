@@ -3,6 +3,7 @@ import Features from "../components/features.astro";
 import Hero from "../components/hero.astro";
 import Updates from "../components/updates.astro";
 import "../styles/global.css";
+import CTA from "../components/cta.astro";
 import Developers from "../components/developers.astro";
 import Guides from "../components/guides.astro";
 import Header from "../components/header.astro";
@@ -22,4 +23,7 @@ import BaseLayout from "../layouts/base.astro";
   <Developers />
   <Guides />
   <Updates />
+  <div class="w-full max-w-xl mx-auto">
+  <CTA />
+</div>
 </BaseLayout>
