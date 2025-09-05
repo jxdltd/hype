@@ -1,0 +1,26 @@
+{
+    "name": "@buildhype/svelte",
+    "type": "module",
+    "version": "0.1.0",
+    "files": [
+        "dist",
+        "src"
+    ],
+    "scripts": {
+        "dev": "vite ./example",
+        "build": "NODE_ENV=production bun run ./scripts/build.ts"
+    },
+    "exports": {
+        "default": {
+            "types": "./src/index.tsx",
+            "default": "./dist/index.js"
+        }
+    },
+    "devDependencies": {
+        "@sveltejs/vite-plugin-svelte": "^6.1.4",
+        "vite": "^7.1.4"
+    },
+    "peerDependencies": {
+        "svelte": "^5.38.7"
+    }
+}
