@@ -1,17 +1,21 @@
 import { Glob } from "bun";
-import { codeToHtml } from "shiki";
+import { type BundledLanguage, codeToHtml } from "shiki";
 
-const snippets = new Glob("./src/snippets/**/*.{ts,tsx}");
+const snippetDir = "./src/snippets";
+
+const snippets = new Glob(`${snippetDir}/*.{ts,tsx}`);
 
 for await (const snippet of snippets.scan(".")) {
   const file = snippet.split("/").pop();
-  const name = file?.split(".")[0];
-  const extension = file?.split(".")[1];
+
+  if (!file) continue;
+
+  const [name, extension] = file.split(".");
 
   const code = await Bun.file(snippet).text();
 
   const html = await codeToHtml(code, {
-    lang: extension,
+    lang: extension as BundledLanguage,
     theme: "vitesse-dark",
   });
 
