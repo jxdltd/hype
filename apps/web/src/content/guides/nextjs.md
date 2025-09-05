@@ -6,7 +6,7 @@ date: 2025-09-05
 
 In this guide we'll show you how to add a waitlist to your Next.js application.
 
-Find the complete code on [GitHub](https://github.com/jxdltd/hype).
+Find the complete code on [GitHub](https://github.com/jxdltd/hype/tree/main/examples/nextjs).
 
 ## Create a Next.js application
 
