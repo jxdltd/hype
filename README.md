@@ -1,3 +1,5 @@
+<img src="./readme.png" alt="Hype" />
+
 # [Hype](https://www.buildhype.dev/)
 
 Pre-launch toolkit for developers.
