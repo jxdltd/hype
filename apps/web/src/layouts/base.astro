@@ -61,9 +61,8 @@ const { title, description, image, url } = Astro.props;
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body
-    class="bg-neutral-900 text-white p-10 flex flex-col min-h-screen gap-20"
+    class="bg-neutral-900 text-white flex flex-col min-h-screen gap-20 p-10"
   >
-    <Header />
     <slot />
     <footer class="text-sm text-neutral-500 text-center">Built by <a class="text-white" href="https://www.holistic.company">The Holistic Company</a></footer>
   </body>

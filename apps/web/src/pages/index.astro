@@ -3,6 +3,7 @@ import Features from "../components/features.astro";
 import Hero from "../components/hero.astro";
 import Updates from "../components/updates.astro";
 import "../styles/global.css";
+import Header from "../components/header.astro";
 import BaseLayout from "../layouts/base.astro";
 ---
 
@@ -12,6 +13,7 @@ import BaseLayout from "../layouts/base.astro";
   image="https://www.buildhype.dev/api/open-graph/home.png"
   url="https://www.buildhype.dev/"
 >
+<Header />
   <Hero />
   <Features />
   <Updates />
