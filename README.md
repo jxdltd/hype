@@ -41,7 +41,7 @@ Hype is built with cutting-edge technologies:
 - [Docs](https://docs.buildhype.dev/docs)
 - [X](https://x.com/jxd_dev)
 
-## Packages
+## Integrations
 
 - [@buildhype/react](https://www.npmjs.com/package/@buildhype/react)
 
