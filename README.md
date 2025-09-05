@@ -7,6 +7,14 @@ Pre-launch toolkit for developers.
 
 ## What is Hype?
 
+Hype is an open-source platform for developers designed to help them go from 0 to 1 as easily as possible. Our goal is to create a modern set of unified tools that work seamlessly together.
+
+- **Waitlists**: Integrate a waitlist into your product in minutes.
+- **Referrals**: Setup a viral referral scheme designed to grow your user base.
+- **CRM**: Powerful dashboard to manage your inbound interest.
+- **Onboarding**: Full control over how and when you onboard your users.
+- **Feedback**: Communicate with your users before and after your product is launched.
+
 ## Why use Hype?
 
 ## Tech Stack
