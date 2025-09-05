@@ -32,3 +32,13 @@ Hype is built with cutting-edge technologies:
 - **Database**: Neon Postgres, Drizzle.
 - **Auth**: Better Auth.
 - **Tooling**: Bun, Turborepo, Vite, Biome.
+
+## Links
+
+- [Website](https://www.buildhype.dev/)
+- [Docs](https://docs.buildhype.dev/docs)
+- [X](https://x.com/jxd_dev)
+
+## Packages
+
+- [@buildhype/react](https://www.npmjs.com/package/@buildhype/react)
