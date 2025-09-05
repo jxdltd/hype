@@ -1,24 +1,29 @@
 ---
 import { getCollection } from "astro:content";
+import Container from "./container.astro";
 
 const updates = await getCollection("updates");
 
 const sortedUpdates = updates.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<div class="w-full max-w-xl mx-auto">
+<Container>
+  <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">Lastest Hype</h2>
+  <p class="text-neutral-400 md:text-lg lg:text-xl mb-5">Stay up to date with the latest Hype updates.</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
   {
     sortedUpdates.map((update) => (
       <a
         href={`/updates/${update.id}`}
-        class="p-4 -mx-4 hover:bg-neutral-800 flex flex-col gap-1"
+        class=" flex flex-col gap-1"
       >
-        <p class="flex items-center gap-2">
-          <span class="text-sm text-neutral-400">{update.data.date.toLocaleDateString()}</span>
+        <span class="text-sm text-neutral-400">{update.data.date.toLocaleDateString()}</span>
+        <p class="font-medium">
           {update.data.title}
         </p>
         <p class="text-sm text-neutral-400">{update.data.description}</p>
       </a>
     ))
   }
-</div>
+  </div>
+</Container>
