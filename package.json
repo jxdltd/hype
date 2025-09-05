@@ -16,7 +16,8 @@
 	},
 	"workspaces": [
 		"apps/*",
-		"packages/*"
+		"packages/*",
+		"examples/*"
 	],
 	"packageManager": "bun@1.2.21",
 	"dependencies": {

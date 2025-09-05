@@ -7,7 +7,11 @@ const pages = Object.fromEntries(
   updates.map(({ id, data }) => [`updates/${id}`, data])
 );
 
-console.log(pages);
+const guides = await getCollection("guides");
+
+const guidesPages = Object.fromEntries(
+  guides.map(({ id, data }) => [`guides/${id}`, data])
+);
 
 export const { getStaticPaths, GET } = OGImageRoute({
   param: "route",
@@ -18,6 +22,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
       description: "Pre-launch toolkit for developers",
     },
     ...pages,
+    ...guidesPages,
   },
 
   // For each page, this callback will be used to customize the OpenGraph image.
