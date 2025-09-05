@@ -45,6 +45,6 @@ Hype is built with cutting-edge technologies:
 
 - [@buildhype/react](https://www.npmjs.com/package/@buildhype/react)
 
-## Stargazers
+## Stargazers
 
 [![Star History Chart](https://api.star-history.com/svg?repos=jxdltd/hype&type=Timeline)](https://www.star-history.com/#jxdltd/hype&Timeline)
