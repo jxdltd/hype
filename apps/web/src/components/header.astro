@@ -9,7 +9,10 @@ import Container from "./container.astro";
     <img src={logo.src} alt="Hype" class="h-5" />
   </a>
   <div class="flex items-center gap-5">
-    <a href="https://docs.buildhype.dev/docs" target="_blank">Docs</a>
+    <div class="font-mono text-neutral-300 text-sm [&>a]:hover:text-white flex items-center gap-3">
+      <a href="https://docs.buildhype.dev/docs" target="_blank">Documentation</a>
+    </div>
+    <div class="flex items-center gap-3">
     <a href="https://github.com/jxdltd/hype" target="_blank"
       ><svg
         role="img"
@@ -32,6 +35,7 @@ import Container from "./container.astro";
         ></path></svg
       >
     </a>
+  </div>
   </div>
 </header>
 </Container>
