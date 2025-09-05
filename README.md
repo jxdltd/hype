@@ -17,6 +17,11 @@ Hype is an open-source platform for developers designed to help them go from 0 t
 
 ## Why use Hype?
 
+- **Open-Source**: We believe in being fully transparent. We're not just selling you a tool, we're building a community.
+- **Developer-First**: We believe in giving developers time to focus on their product. Integrating should take minutes, not hours.
+- **Customisable**: Pre-launch features should match the look and feel of your product. We give you complete control over the UX.
+- **Independent**: Hype is fully bootstrapped and we deliberately aren't chasing after venture capital. We believe our priorities are the users not the shareholders.
+
 ## Tech Stack
 
 Hype is built with cutting-edge technologies:
