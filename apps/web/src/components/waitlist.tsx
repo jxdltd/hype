@@ -16,10 +16,10 @@ export function Waitlist() {
         className="border border-neutral-500 p-2 focus:outline-none focus:border-white text-sm"
       />
       <WaitlistSubmit className="bg-white text-black px-4 py-2 hover:bg-neutral-100 cursor-pointer text-sm">
-        Join Waitlist
+        Get Started
       </WaitlistSubmit>
       <WaitlistSuccess className="text-sm font-medium">
-        Thank you for joining the waitlist!
+        Thank you for signing up! We'll be in touch very soon.
       </WaitlistSuccess>
     </HypeWaitlist>
   );
