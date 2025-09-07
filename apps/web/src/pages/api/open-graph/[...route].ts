@@ -21,6 +21,10 @@ export const { getStaticPaths, GET } = OGImageRoute({
       title: "Hype",
       description: "Pre-launch toolkit for developers",
     },
+    starterKits: {
+      title: "Starter Kits",
+      description: "A collection of popular starter kits",
+    },
     ...pages,
     ...guidesPages,
   },

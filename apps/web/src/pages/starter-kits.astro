@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+import Container from "../components/container.astro";
+import CTA from "../components/cta.astro";
+import Header from "../components/header.astro";
+import BaseLayout from "../layouts/base.astro";
+
+const starterKits = [
+  {
+    name: "Next Forge",
+    website: {
+      url: "https://www.next-forge.com/",
+      pretty: "next-forge.com",
+    },
+    github: {
+      url: "https://github.com/vercel/next-forge",
+      pretty: "vercel/next-forge",
+    },
+    openSource: true,
+    framework: {
+      url: "https://nextjs.org/",
+      pretty: "Next.js",
+    },
+    price: "Free",
+  },
+];
+---
+
+<BaseLayout
+  title="Starter Kits – Hype"
+  description="Pre-launch toolkit for developers"
+  image="https://www.buildhype.dev/api/open-graph/starter-kits.png"
+  url="https://www.buildhype.dev/starter-kits"
+>
+  <Header />
+  <Container>
+  <table class="w-full border-collapse border border-neutral-800 [&_th]:p-2 [&_td]:p-2 text-sm">
+    <thead class="text-left bg-neutral-800 font-medium">
+      <tr>
+        <th>Name</th>
+        <th>Website URL</th>
+        <th>GitHub URL</th>
+        <th>Open Source</th>
+        <th>Framework</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {starterKits.map((starterKit) => (
+        <tr>
+          <td class="font-medium">{starterKit.name}</td>
+          <td>
+            <a class="text-blue-400 font-medium hover:text-blue-300" href={starterKit.website.url} target="_blank">{starterKit.website.pretty}</a>
+          </td>
+          <td>
+            <a class="text-blue-400 font-medium hover:text-blue-300" href={starterKit.github.url} target="_blank">{starterKit.github.pretty}</a>
+          </td>
+          <td>{starterKit.openSource ? "Yes" : "No"}</td>
+          <td>
+            <a class="text-blue-400 font-medium hover:text-blue-300" href={starterKit.framework.url} target="_blank">{starterKit.framework.pretty}</a>
+          </td>
+          <td>{starterKit.price}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</Container>
+  <div class="w-full max-w-xl mx-auto">
+  <CTA />
+</div>
+</BaseLayout>
