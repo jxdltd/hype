@@ -1,5 +1,12 @@
 # web
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @buildhype/react@0.2.1
+
 ## 0.0.3
 
 ### Patch Changes
