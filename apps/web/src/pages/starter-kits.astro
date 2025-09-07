@@ -5,6 +5,11 @@ import CTA from "../components/cta.astro";
 import Header from "../components/header.astro";
 import BaseLayout from "../layouts/base.astro";
 
+const nextJs = {
+  url: "https://nextjs.org/",
+  pretty: "Next.js",
+}
+
 const starterKits = [
   {
     name: "Next Forge",
@@ -17,11 +22,58 @@ const starterKits = [
       pretty: "vercel/next-forge",
     },
     openSource: true,
-    framework: {
-      url: "https://nextjs.org/",
-      pretty: "Next.js",
-    },
+    framework: nextJs,
     price: "Free",
+  },
+  {
+    name: "ShipFast",
+    website: {
+      url: "https://shipfa.st/",
+      pretty: "shipfa.st",
+    },
+    github: null,
+    openSource: false,
+    framework: nextJs,
+    price: "$199+",
+  },
+  {
+    name: "Supastarter",
+    website: {
+      url: "https://supastarter.dev/",
+      pretty: "supastarter.dev",
+    },
+    github: null,
+    openSource: false,
+    framework: nextJs,
+    price: "$349+",
+  },
+  {
+    name: "Supastarter",
+    website: {
+      url: "https://supastarter.dev/",
+      pretty: "supastarter.dev",
+    },
+    github: null,
+    openSource: false,
+    framework: {
+      url: "https://nuxt.com/",
+      pretty: "Nuxt.js",
+    },
+    price: "$349+",
+  },
+  {
+    name: "Supastarter",
+    website: {
+      url: "https://supastarter.dev/",
+      pretty: "supastarter.dev",
+    },
+    github: null,
+    openSource: false,
+    framework: {
+      url: "https://svelte.dev/",
+      pretty: "SvelteKit",
+    },
+    price: "$349+",
   },
 ];
 ---
@@ -38,9 +90,9 @@ const starterKits = [
     <thead class="text-left bg-neutral-800 font-medium">
       <tr>
         <th>Name</th>
-        <th>Website URL</th>
-        <th>GitHub URL</th>
-        <th>Open Source</th>
+        <th>Website</th>
+        <th>GitHub</th>
+        <!-- <th>Open Source</th> -->
         <th>Framework</th>
         <th>Price</th>
       </tr>
@@ -53,9 +105,10 @@ const starterKits = [
             <a class="text-blue-400 font-medium hover:text-blue-300" href={starterKit.website.url} target="_blank">{starterKit.website.pretty}</a>
           </td>
           <td>
-            <a class="text-blue-400 font-medium hover:text-blue-300" href={starterKit.github.url} target="_blank">{starterKit.github.pretty}</a>
+            {starterKit.github && <a class="text-blue-400 font-medium hover:text-blue-300" href={starterKit.github.url} target="_blank">{starterKit.github.pretty}</a>}
+            {!starterKit.github && <span class="text-neutral-400 text-xs font-medium">N/A</span>}
           </td>
-          <td>{starterKit.openSource ? "Yes" : "No"}</td>
+          {/* <td>{starterKit.openSource ? "Yes" : "No"}</td> */}
           <td>
             <a class="text-blue-400 font-medium hover:text-blue-300" href={starterKit.framework.url} target="_blank">{starterKit.framework.pretty}</a>
           </td>
