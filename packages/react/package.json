@@ -1,11 +1,11 @@
 {
     "name": "@buildhype/react",
     "type": "module",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "files": [
-    "dist",
-    "src"
-  ],
+        "dist",
+        "src"
+    ],
     "scripts": {
         "dev": "bun run ./scripts/build.ts",
         "build": "NODE_ENV=production bun run ./scripts/build.ts"
