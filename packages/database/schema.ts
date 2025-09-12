@@ -1,5 +1,11 @@
 import { relations } from "drizzle-orm";
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  pgTable,
+  text,
+  timestamp,
+  unique,
+} from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -109,21 +115,27 @@ export const publicKeyRelations = relations(publicKey, ({ one }) => ({
   }),
 }));
 
-export const prospect = pgTable("prospect", {
-  id: text("id").primaryKey(),
-  email: text("email").notNull(),
-  createdAt: timestamp("created_at").$defaultFn(
-    () => /* @__PURE__ */ new Date()
-  ),
-  updatedAt: timestamp("updated_at").$defaultFn(
-    () => /* @__PURE__ */ new Date()
-  ),
-  projectId: text("project_id")
-    .notNull()
-    .references(() => project.id, { onDelete: "cascade" }),
-  emailVerified: boolean("email_verified").default(false).notNull(),
-  accessGranted: boolean("access_granted").default(false).notNull(),
-});
+export const prospect = pgTable(
+  "prospect",
+  {
+    id: text("id").primaryKey(),
+    email: text("email").notNull(),
+    createdAt: timestamp("created_at").$defaultFn(
+      () => /* @__PURE__ */ new Date()
+    ),
+    updatedAt: timestamp("updated_at").$defaultFn(
+      () => /* @__PURE__ */ new Date()
+    ),
+    projectId: text("project_id")
+      .notNull()
+      .references(() => project.id, { onDelete: "cascade" }),
+    emailVerified: boolean("email_verified").default(false).notNull(),
+    accessGranted: boolean("access_granted").default(false).notNull(),
+  },
+  (t: any) => ({
+    unq: unique().on(t.email, t.projectId),
+  })
+);
 
 export const prospectRelations = relations(prospect, ({ one, many }) => ({
   project: one(project, {
