@@ -46,6 +46,14 @@ Hype is built with cutting-edge technologies:
 - [@buildhype/react](https://www.npmjs.com/package/@buildhype/react)
 - [@buildhype/svelte](https://www.npmjs.com/package/@buildhype/svelte)
 
+## Contributors
+
+<a href="https://github.com/jxdltd/hype/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=jxdltd/hype" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
 ## Stargazers
 
 [![Star History Chart](https://api.star-history.com/svg?repos=jxdltd/hype&type=Timeline)](https://www.star-history.com/#jxdltd/hype&Timeline)
