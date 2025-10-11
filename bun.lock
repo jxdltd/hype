@@ -71,7 +71,7 @@
     },
     "apps/web": {
       "name": "web",
-      "version": "0.0.2",
+      "version": "0.0.4",
       "dependencies": {
         "@astrojs/react": "^4.3.0",
         "@astrojs/sitemap": "^3.5.1",
@@ -93,7 +93,7 @@
     },
     "examples/nextjs": {
       "name": "nextjs-example",
-      "version": "0.1.0",
+      "version": "0.1.2",
       "dependencies": {
         "@buildhype/react": "0.1.0",
         "@hookform/resolvers": "^3.10.0",
@@ -243,7 +243,7 @@
     },
     "packages/react": {
       "name": "@buildhype/react",
-      "version": "0.1.0",
+      "version": "0.2.1",
       "dependencies": {
         "react": "^19.1.1",
       },

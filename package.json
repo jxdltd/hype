@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "turbo run dev",
-		"build": "turbo run build"
+		"build": "turbo run build",
+		"tc": "turbo run tc"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.2",

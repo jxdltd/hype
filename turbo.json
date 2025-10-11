@@ -11,6 +11,10 @@
 		"dev": {
 			"persistent": true,
 			"cache": false
+		},
+		"tc": {
+			"persistent": true,
+			"cache": false
 		}
 	}
 }
