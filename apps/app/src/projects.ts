@@ -9,7 +9,7 @@ const createProjectSchema = z.object({
 });
 
 export const createProject = createServerFn()
-  .validator(createProjectSchema)
+  .inputValidator(createProjectSchema)
   .handler(async ({ data }) => {
     const auth = await getAuth(); // todo middleware
 

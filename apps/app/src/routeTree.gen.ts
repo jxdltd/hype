@@ -8,8 +8,6 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createServerRootRoute } from '@tanstack/react-start/server'
-
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifiedRouteImport } from './routes/verified'
 import { Route as SignUpRouteImport } from './routes/sign-up'
@@ -17,18 +15,16 @@ import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as MainRouteImport } from './routes/_main'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as ProjectsNewRouteImport } from './routes/projects/new'
+import { Route as ApiWaitlistRouteImport } from './routes/api/waitlist'
+import { Route as ApiVerifyRouteImport } from './routes/api/verify'
+import { Route as ApiInngestRouteImport } from './routes/api/inngest'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
+import { Route as ApiAccessEmailRouteImport } from './routes/api/access.$email'
 import { Route as MainProjectsIdRouteImport } from './routes/_main/projects/$id'
 import { Route as MainProjectsIdIndexRouteImport } from './routes/_main/projects/$id.index'
 import { Route as MainProjectsIdSettingsRouteImport } from './routes/_main/projects/$id.settings'
 import { Route as MainProjectsIdProspectsIndexRouteImport } from './routes/_main/projects/$id.prospects.index'
 import { Route as MainProjectsIdProspectsProspectIdRouteImport } from './routes/_main/projects/$id.prospects.$prospectId'
-import { ServerRoute as ApiWaitlistServerRouteImport } from './routes/api/waitlist'
-import { ServerRoute as ApiVerifyServerRouteImport } from './routes/api/verify'
-import { ServerRoute as ApiInngestServerRouteImport } from './routes/api/inngest'
-import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth.$'
-import { ServerRoute as ApiAccessEmailServerRouteImport } from './routes/api/access.$email'
-
-const rootServerRouteImport = createServerRootRoute()
 
 const VerifiedRoute = VerifiedRouteImport.update({
   id: '/verified',
@@ -59,6 +55,31 @@ const ProjectsNewRoute = ProjectsNewRouteImport.update({
   path: '/projects/new',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiWaitlistRoute = ApiWaitlistRouteImport.update({
+  id: '/api/waitlist',
+  path: '/api/waitlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVerifyRoute = ApiVerifyRouteImport.update({
+  id: '/api/verify',
+  path: '/api/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiInngestRoute = ApiInngestRouteImport.update({
+  id: '/api/inngest',
+  path: '/api/inngest',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAccessEmailRoute = ApiAccessEmailRouteImport.update({
+  id: '/api/access/$email',
+  path: '/api/access/$email',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MainProjectsIdRoute = MainProjectsIdRouteImport.update({
   id: '/projects/$id',
   path: '/projects/$id',
@@ -86,39 +107,19 @@ const MainProjectsIdProspectsProspectIdRoute =
     path: '/prospects/$prospectId',
     getParentRoute: () => MainProjectsIdRoute,
   } as any)
-const ApiWaitlistServerRoute = ApiWaitlistServerRouteImport.update({
-  id: '/api/waitlist',
-  path: '/api/waitlist',
-  getParentRoute: () => rootServerRouteImport,
-} as any)
-const ApiVerifyServerRoute = ApiVerifyServerRouteImport.update({
-  id: '/api/verify',
-  path: '/api/verify',
-  getParentRoute: () => rootServerRouteImport,
-} as any)
-const ApiInngestServerRoute = ApiInngestServerRouteImport.update({
-  id: '/api/inngest',
-  path: '/api/inngest',
-  getParentRoute: () => rootServerRouteImport,
-} as any)
-const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
-  getParentRoute: () => rootServerRouteImport,
-} as any)
-const ApiAccessEmailServerRoute = ApiAccessEmailServerRouteImport.update({
-  id: '/api/access/$email',
-  path: '/api/access/$email',
-  getParentRoute: () => rootServerRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/verified': typeof VerifiedRoute
+  '/api/inngest': typeof ApiInngestRoute
+  '/api/verify': typeof ApiVerifyRoute
+  '/api/waitlist': typeof ApiWaitlistRoute
   '/projects/new': typeof ProjectsNewRoute
   '/': typeof MainIndexRoute
   '/projects/$id': typeof MainProjectsIdRouteWithChildren
+  '/api/access/$email': typeof ApiAccessEmailRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/projects/$id/settings': typeof MainProjectsIdSettingsRoute
   '/projects/$id/': typeof MainProjectsIdIndexRoute
   '/projects/$id/prospects/$prospectId': typeof MainProjectsIdProspectsProspectIdRoute
@@ -128,8 +129,13 @@ export interface FileRoutesByTo {
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/verified': typeof VerifiedRoute
+  '/api/inngest': typeof ApiInngestRoute
+  '/api/verify': typeof ApiVerifyRoute
+  '/api/waitlist': typeof ApiWaitlistRoute
   '/projects/new': typeof ProjectsNewRoute
   '/': typeof MainIndexRoute
+  '/api/access/$email': typeof ApiAccessEmailRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/projects/$id/settings': typeof MainProjectsIdSettingsRoute
   '/projects/$id': typeof MainProjectsIdIndexRoute
   '/projects/$id/prospects/$prospectId': typeof MainProjectsIdProspectsProspectIdRoute
@@ -141,9 +147,14 @@ export interface FileRoutesById {
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/verified': typeof VerifiedRoute
+  '/api/inngest': typeof ApiInngestRoute
+  '/api/verify': typeof ApiVerifyRoute
+  '/api/waitlist': typeof ApiWaitlistRoute
   '/projects/new': typeof ProjectsNewRoute
   '/_main/': typeof MainIndexRoute
   '/_main/projects/$id': typeof MainProjectsIdRouteWithChildren
+  '/api/access/$email': typeof ApiAccessEmailRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/_main/projects/$id/settings': typeof MainProjectsIdSettingsRoute
   '/_main/projects/$id/': typeof MainProjectsIdIndexRoute
   '/_main/projects/$id/prospects/$prospectId': typeof MainProjectsIdProspectsProspectIdRoute
@@ -155,9 +166,14 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/verified'
+    | '/api/inngest'
+    | '/api/verify'
+    | '/api/waitlist'
     | '/projects/new'
     | '/'
     | '/projects/$id'
+    | '/api/access/$email'
+    | '/api/auth/$'
     | '/projects/$id/settings'
     | '/projects/$id/'
     | '/projects/$id/prospects/$prospectId'
@@ -167,8 +183,13 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/verified'
+    | '/api/inngest'
+    | '/api/verify'
+    | '/api/waitlist'
     | '/projects/new'
     | '/'
+    | '/api/access/$email'
+    | '/api/auth/$'
     | '/projects/$id/settings'
     | '/projects/$id'
     | '/projects/$id/prospects/$prospectId'
@@ -179,9 +200,14 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/verified'
+    | '/api/inngest'
+    | '/api/verify'
+    | '/api/waitlist'
     | '/projects/new'
     | '/_main/'
     | '/_main/projects/$id'
+    | '/api/access/$email'
+    | '/api/auth/$'
     | '/_main/projects/$id/settings'
     | '/_main/projects/$id/'
     | '/_main/projects/$id/prospects/$prospectId'
@@ -193,60 +219,12 @@ export interface RootRouteChildren {
   SignInRoute: typeof SignInRoute
   SignUpRoute: typeof SignUpRoute
   VerifiedRoute: typeof VerifiedRoute
+  ApiInngestRoute: typeof ApiInngestRoute
+  ApiVerifyRoute: typeof ApiVerifyRoute
+  ApiWaitlistRoute: typeof ApiWaitlistRoute
   ProjectsNewRoute: typeof ProjectsNewRoute
-}
-export interface FileServerRoutesByFullPath {
-  '/api/inngest': typeof ApiInngestServerRoute
-  '/api/verify': typeof ApiVerifyServerRoute
-  '/api/waitlist': typeof ApiWaitlistServerRoute
-  '/api/access/$email': typeof ApiAccessEmailServerRoute
-  '/api/auth/$': typeof ApiAuthSplatServerRoute
-}
-export interface FileServerRoutesByTo {
-  '/api/inngest': typeof ApiInngestServerRoute
-  '/api/verify': typeof ApiVerifyServerRoute
-  '/api/waitlist': typeof ApiWaitlistServerRoute
-  '/api/access/$email': typeof ApiAccessEmailServerRoute
-  '/api/auth/$': typeof ApiAuthSplatServerRoute
-}
-export interface FileServerRoutesById {
-  __root__: typeof rootServerRouteImport
-  '/api/inngest': typeof ApiInngestServerRoute
-  '/api/verify': typeof ApiVerifyServerRoute
-  '/api/waitlist': typeof ApiWaitlistServerRoute
-  '/api/access/$email': typeof ApiAccessEmailServerRoute
-  '/api/auth/$': typeof ApiAuthSplatServerRoute
-}
-export interface FileServerRouteTypes {
-  fileServerRoutesByFullPath: FileServerRoutesByFullPath
-  fullPaths:
-    | '/api/inngest'
-    | '/api/verify'
-    | '/api/waitlist'
-    | '/api/access/$email'
-    | '/api/auth/$'
-  fileServerRoutesByTo: FileServerRoutesByTo
-  to:
-    | '/api/inngest'
-    | '/api/verify'
-    | '/api/waitlist'
-    | '/api/access/$email'
-    | '/api/auth/$'
-  id:
-    | '__root__'
-    | '/api/inngest'
-    | '/api/verify'
-    | '/api/waitlist'
-    | '/api/access/$email'
-    | '/api/auth/$'
-  fileServerRoutesById: FileServerRoutesById
-}
-export interface RootServerRouteChildren {
-  ApiInngestServerRoute: typeof ApiInngestServerRoute
-  ApiVerifyServerRoute: typeof ApiVerifyServerRoute
-  ApiWaitlistServerRoute: typeof ApiWaitlistServerRoute
-  ApiAccessEmailServerRoute: typeof ApiAccessEmailServerRoute
-  ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
+  ApiAccessEmailRoute: typeof ApiAccessEmailRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -293,6 +271,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/waitlist': {
+      id: '/api/waitlist'
+      path: '/api/waitlist'
+      fullPath: '/api/waitlist'
+      preLoaderRoute: typeof ApiWaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/verify': {
+      id: '/api/verify'
+      path: '/api/verify'
+      fullPath: '/api/verify'
+      preLoaderRoute: typeof ApiVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/inngest': {
+      id: '/api/inngest'
+      path: '/api/inngest'
+      fullPath: '/api/inngest'
+      preLoaderRoute: typeof ApiInngestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/access/$email': {
+      id: '/api/access/$email'
+      path: '/api/access/$email'
+      fullPath: '/api/access/$email'
+      preLoaderRoute: typeof ApiAccessEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_main/projects/$id': {
       id: '/_main/projects/$id'
       path: '/projects/$id'
@@ -327,45 +340,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/projects/$id/prospects/$prospectId'
       preLoaderRoute: typeof MainProjectsIdProspectsProspectIdRouteImport
       parentRoute: typeof MainProjectsIdRoute
-    }
-  }
-}
-declare module '@tanstack/react-start/server' {
-  interface ServerFileRoutesByPath {
-    '/api/waitlist': {
-      id: '/api/waitlist'
-      path: '/api/waitlist'
-      fullPath: '/api/waitlist'
-      preLoaderRoute: typeof ApiWaitlistServerRouteImport
-      parentRoute: typeof rootServerRouteImport
-    }
-    '/api/verify': {
-      id: '/api/verify'
-      path: '/api/verify'
-      fullPath: '/api/verify'
-      preLoaderRoute: typeof ApiVerifyServerRouteImport
-      parentRoute: typeof rootServerRouteImport
-    }
-    '/api/inngest': {
-      id: '/api/inngest'
-      path: '/api/inngest'
-      fullPath: '/api/inngest'
-      preLoaderRoute: typeof ApiInngestServerRouteImport
-      parentRoute: typeof rootServerRouteImport
-    }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatServerRouteImport
-      parentRoute: typeof rootServerRouteImport
-    }
-    '/api/access/$email': {
-      id: '/api/access/$email'
-      path: '/api/access/$email'
-      fullPath: '/api/access/$email'
-      preLoaderRoute: typeof ApiAccessEmailServerRouteImport
-      parentRoute: typeof rootServerRouteImport
     }
   }
 }
@@ -406,18 +380,22 @@ const rootRouteChildren: RootRouteChildren = {
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
   VerifiedRoute: VerifiedRoute,
+  ApiInngestRoute: ApiInngestRoute,
+  ApiVerifyRoute: ApiVerifyRoute,
+  ApiWaitlistRoute: ApiWaitlistRoute,
   ProjectsNewRoute: ProjectsNewRoute,
+  ApiAccessEmailRoute: ApiAccessEmailRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-const rootServerRouteChildren: RootServerRouteChildren = {
-  ApiInngestServerRoute: ApiInngestServerRoute,
-  ApiVerifyServerRoute: ApiVerifyServerRoute,
-  ApiWaitlistServerRoute: ApiWaitlistServerRoute,
-  ApiAccessEmailServerRoute: ApiAccessEmailServerRoute,
-  ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
+
+import type { getRouter } from './router.ts'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
 }
-export const serverRouteTree = rootServerRouteImport
-  ._addFileChildren(rootServerRouteChildren)
-  ._addFileTypes<FileServerRouteTypes>()

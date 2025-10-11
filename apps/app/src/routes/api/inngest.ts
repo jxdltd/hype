@@ -1,8 +1,12 @@
 import { handler } from "@repo/jobs";
-import { createServerFileRoute } from "@tanstack/react-start/server";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const ServerRoute = createServerFileRoute("/api/inngest").methods({
-	GET: handler,
-	POST: handler,
-	PUT: handler,
+export const Route = createFileRoute("/api/inngest")({
+  server: {
+    handlers: {
+      GET: ({ request }) => handler(request),
+      POST: ({ request }) => handler(request),
+      PUT: ({ request }) => handler(request),
+    },
+  },
 });

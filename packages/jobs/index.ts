@@ -1,31 +1,8 @@
-import { createServerFileRoute } from "@tanstack/react-start/server";
-import { InngestCommHandler, type ServeHandlerOptions } from "inngest";
+import { serve } from "inngest/edge";
 import { inngest } from "./client";
 import { newProspect } from "./prospects/new";
 import { verifyEmail } from "./prospects/verify-email";
 import { helloWorld } from "./test";
-
-const serve = (options: ServeHandlerOptions) => {
-  const handler = new InngestCommHandler({
-    frameworkName: "TanStack Start",
-    fetch: fetch.bind(globalThis),
-    ...options,
-    handler: ({ request }: { request: Request }) => {
-      return {
-        body: () => request.json(),
-        headers: (key) => request.headers.get(key),
-        method: () => request.method,
-        url: () =>
-          new URL(request.url, `https://${request.headers.get("host") || ""}`),
-        transformResponse: ({ body, status, headers }) => {
-          return new Response(body, { status, headers });
-        },
-      };
-    },
-  });
-
-  return handler.createHandler();
-};
 
 export const handler = serve({
   client: inngest,

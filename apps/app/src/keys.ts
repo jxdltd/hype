@@ -11,7 +11,7 @@ const schema = z.object({
 type Schema = z.infer<typeof schema>;
 
 export const createPublicKey = createServerFn()
-  .validator((body: Schema) => schema.parse(body))
+  .inputValidator((body: Schema) => schema.parse(body))
   .handler(async ({ data }) => {
     const auth = await getAuth();
 

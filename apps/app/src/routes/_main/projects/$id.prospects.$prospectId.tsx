@@ -9,50 +9,50 @@ import { Notes } from "./-components/notes";
 const fetchParamsSchema = z.string(); // prospectId
 
 const fetchProspect = createServerFn()
-  .middleware([authenticatedMiddleware])
-  .validator(fetchParamsSchema)
-  .handler(async ({ context, data }) => {
-    const found = await db.query.prospect.findFirst({
-      with: {
-        project: true,
-      },
-      where: eq(prospect.id, data),
-    });
+	.middleware([authenticatedMiddleware])
+	.inputValidator(fetchParamsSchema)
+	.handler(async ({ context, data }) => {
+		const found = await db.query.prospect.findFirst({
+			with: {
+				project: true,
+			},
+			where: eq(prospect.id, data),
+		});
 
-    if (!found) {
-      throw notFound();
-    }
+		if (!found) {
+			throw notFound();
+		}
 
-    if (found.project.userId !== context.user.id) {
-      throw notFound();
-    }
+		if (found.project.userId !== context.user.id) {
+			throw notFound();
+		}
 
-    return found;
-  });
+		return found;
+	});
 
 export const Route = createFileRoute(
-  "/_main/projects/$id/prospects/$prospectId"
+	"/_main/projects/$id/prospects/$prospectId",
 )({
-  component: RouteComponent,
-  loader: async ({ params }) => {
-    return {
-      prospect: await fetchProspect({ data: params.prospectId }),
-    };
-  },
+	component: RouteComponent,
+	loader: async ({ params }) => {
+		return {
+			prospect: await fetchProspect({ data: params.prospectId }),
+		};
+	},
 });
 
 function RouteComponent() {
-  const { prospect } = Route.useLoaderData();
+	const { prospect } = Route.useLoaderData();
 
-  return (
-    <div className="px-10 flex flex-col">
-      <div className="flex items-center gap-4 justify-between mb-4">
-        <h1 className="text-2xl font-bold">{prospect.email}</h1>
-        {/* <div>Actions</div> */}
-      </div>
-      <div>
-        <Notes />
-      </div>
-    </div>
-  );
+	return (
+		<div className="px-10 flex flex-col">
+			<div className="flex items-center gap-4 justify-between mb-4">
+				<h1 className="text-2xl font-bold">{prospect.email}</h1>
+				{/* <div>Actions</div> */}
+			</div>
+			<div>
+				<Notes />
+			</div>
+		</div>
+	);
 }

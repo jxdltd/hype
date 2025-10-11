@@ -1,10 +1,10 @@
 import { auth } from "@repo/auth/server";
 import { redirect } from "@tanstack/react-router";
 import { createMiddleware, createServerFn } from "@tanstack/react-start";
-import { getWebRequest } from "@tanstack/react-start/server";
+import { getRequest } from "@tanstack/react-start/server";
 
 export const getAuth = createServerFn().handler(async () => {
-  const request = getWebRequest();
+  const request = getRequest();
 
   if (!request) {
     throw new Error("No request found");
