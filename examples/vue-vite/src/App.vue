@@ -5,13 +5,15 @@ import {
   WaitlistSubmit, 
   WaitlistSuccess 
 } from '@buildhype/vue';
+
+const apiKey = import.meta.env.VITE_HYPE_API_KEY;
 </script>
 
 <template>
   <div class="card">
     <h1>Hype Vue Example</h1>
     <Waitlist 
-      :api-key="import.meta.env.VITE_HYPE_API_KEY"
+      :api-key="apiKey"
       class="waitlist-form"
     >
       <WaitlistEmail 
