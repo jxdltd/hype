@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+import screenshot from "../assets/dashboard.png";
+---
+
+<div
+  class="bg-white border-gray-200 border rounded-xl overflow-hidden shadow-xs relative"
+>
+  <div class="flex items-center gap-2 p-3 relative border-b border-gray-200">
+    <div class="flex items-center gap-1">
+      <div class="size-3 bg-red-500 rounded-full"></div>
+      <div class="size-3 bg-yellow-500 rounded-full"></div>
+      <div class="size-3 bg-green-500 rounded-full"></div>
+    </div>
+    <a
+      href="https://app.buildhype.dev"
+      class="absolute left-1/2 -translate-x-1/2 text-xs font-mono text-neutral-500"
+    >
+      <span>https://</span><span class="font-medium text-black"
+        >app.buildhype.dev</span
+      ><span>/</span>
+    </a>
+  </div>
+  <Image src={screenshot} alt="Screenshot" class="w-full" />
+</div>

@@ -1,0 +1,103 @@
+---
+import "../styles/global.css";
+
+import { Font } from "astro:assets";
+import Features from "../components/features.astro";
+import Footer from "../components/footer.astro";
+import Header from "../components/header.astro";
+import Hero from "../components/hero.astro";
+import Screenshot from "../components/screenshot.astro";
+import { Waitlist } from "../components/waitlist";
+
+const title = "Hype";
+const description =
+	"Introducing Hype, the ultimate toolkit for developers looking to supercharge their product launches with efficient waitlist management. Designed for tech-savvy innovators using popular frameworks like React, Vue, and Svelte, Hype seamlessly integrates essential waitlist functionalities right into your app.\n\nCapture the excitement of early adopters by effortlessly collecting and verifying email addresses, ensuring a clean and authentic user list. Our intuitive CRM portal makes organizing and monitoring potential users a breeze, allowing you to engage with future customers effectively and build momentum before your big launch.\n\nWith Hype, you can manage user access seamlessly, ensuring a smooth and secure onboarding process. Transform your launch strategy and maximize customer interest with Hype's comprehensive, developer-friendly toolset.";
+---
+
+<html lang="en" class="bg-gray-50">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- HTML Meta Tags -->
+    <title>{title}</title>
+    <meta
+      name="description"
+      content={description}
+    />
+
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content={title} />
+    <meta
+      itemprop="description"
+      content={description}
+    />
+    <meta itemprop="image" content="/og.png" />
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://www.buildhype.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content={description}
+    />
+    <meta property="og:image" content="/og.png" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta
+      name="twitter:description"
+      content={description}
+    />
+    <meta name="twitter:image" content="/og.png" />
+
+    <!-- Meta Tags Generated via https://heymeta.com -->
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <Font cssVariable="--font-geistmono" preload />
+    <Font cssVariable="--font-geist" preload />
+  </head>
+  <body class="flex flex-col">
+    
+    <Header />
+
+    <main class="flex-1 flex items-center flex-col mb-20">
+      <Hero />
+
+      <div class="-mt-36 p-5 md:p-10">
+        <Screenshot />
+      </div>
+
+      <Features />
+
+      <section class="max-w-xl mx-auto p-10 flex flex-col items-center">
+        <div
+          class="mb-6 text-xl md:text-2xl lg:text-3xl font-black text-center"
+        >
+          <p>Get started today</p>
+        </div>
+        <p
+          class="text-sm md:text-base text-gray-700 mb-6 text-center text-balance"
+        >
+          Start building hype today. It's free to try.
+        </p>
+        <Waitlist client:load />
+      </section>
+    </main>
+
+    <Footer />
+
+    <script
+      is:inline
+      src="https://cdn.databuddy.cc/databuddy.js"
+      data-client-id={import.meta.env.PUBLIC_DATABUDDY_CLIENT_ID}
+      data-enable-batching="true"
+      crossorigin="anonymous"
+      async></script>
+  </body>
+</html>

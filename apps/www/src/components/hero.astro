@@ -1,0 +1,42 @@
+---
+import { Waitlist } from "./waitlist";
+---
+
+<section
+  class="p-10 flex flex-col items-center h-screen justify-center relative"
+>
+<!-- todo -->
+  <!-- <a
+    href="https://peerlist.io/jamie/project/forgotten-bookmarks"
+    target="_blank"
+    rel="noreferrer"
+    class="mb-16"
+  >
+    <img
+      src="https://peerlist.io/api/v1/projects/embed/PRJHOK87KBOB6MMO62PQ7LADJLAQBJ?showUpvote=true&theme=light"
+      alt="Forgotten Bookmarks"
+      style="width: auto; height: 64px;"
+    />
+  </a> -->
+  <!-- <p
+          class="text-xs text-gray-500 mb-10 font-mono font-medium text-center text-balance uppercase"
+        >
+          Bookmark manager for developers
+        </p> -->
+  <div class="mb-10 text-3xl md:text-4xl lg:text-5xl font-black text-center">
+    <p class="text-gray-300">Launch smarter,</p>
+    <p>build hype faster</p>
+  </div>
+  <p
+    class="text-sm md:text-base text-gray-700 mb-6 text-center text-balance max-w-lg"
+  >
+    Hype is a developer toolkit for managing product waitlists. It integrates with React, Vue, and Svelte to help you collect and verify emails, organize contacts through an intuitive CRM, and control user access. Build momentum for your launch with clean, efficient waitlist management designed for developers.
+  </p>
+
+  <Waitlist client:load />
+
+  <div
+    class="w-2/3 aspect-square bg-purple-500 rounded-full blur-2xl absolute bottom-0 translate-y-2/3 -z-50"
+  >
+  </div>
+</section>
