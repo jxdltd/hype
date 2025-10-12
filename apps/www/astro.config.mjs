@@ -5,6 +5,8 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 
+import vercel from "@astrojs/vercel";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.buildhype.dev",
@@ -33,4 +35,5 @@ export default defineConfig({
   },
 
   integrations: [sitemap(), react()],
+  adapter: vercel(),
 });

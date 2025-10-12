@@ -11,6 +11,7 @@
 	"dependencies": {
 		"@astrojs/react": "^4.4.0",
 		"@astrojs/sitemap": "^3.6.0",
+		"@astrojs/vercel": "^8.2.9",
 		"@buildhype/react": "workspace:*",
 		"@tailwindcss/vite": "^4.1.14",
 		"@types/react": "^19.2.2",
